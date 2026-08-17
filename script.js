@@ -2,7 +2,7 @@
    Prathvi portfolio — 3D interactions
    ========================================================== */
 
-// ---------- 0. ENTRY GATE : scratch to enter ----------
+// ---------- 0. ENTRY GATE : smash the letters to enter ----------
 (function gate() {
   const gateEl = document.getElementById("gate");
   const cv = document.getElementById("gateCanvas");
@@ -11,67 +11,186 @@
   if (!gateEl || !cv) return;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const styles = getComputedStyle(document.documentElement);
+  const rootStyles = getComputedStyle(document.documentElement);
   const theme = () => ({
-    accent: styles.getPropertyValue("--accent").trim(),
-    accentInk: styles.getPropertyValue("--accent-ink").trim(),
+    accent: rootStyles.getPropertyValue("--accent").trim(),
+    accentInk: rootStyles.getPropertyValue("--accent-ink").trim(),
   });
 
   const ctx = cv.getContext("2d");
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let W, H, opened = false;
+  let W, H, fontSize, letters = [], opened = false;
+  const NAME = "PRATHVI";
+  const particles = [];
+  const waves = [];
+  let shake = 0;
+  let mouse = { x: -9999, y: -9999 };
 
-  function paintCover() {
+  function layout() {
     W = cv.width = innerWidth * dpr;
     H = cv.height = innerHeight * dpr;
+    fontSize = Math.min(W * 0.115, 190 * dpr);
+    ctx.font = `800 ${fontSize}px Archivo, sans-serif`;
+    const widths = [...NAME].map((c) => ctx.measureText(c).width);
+    const gap = fontSize * 0.06;
+    const total = widths.reduce((a, b) => a + b, 0) + gap * (NAME.length - 1);
+    let x = (W - total) / 2;
+    const y = H / 2;
+    const prev = letters;
+    letters = [...NAME].map((ch, i) => {
+      const l = {
+        ch,
+        x: x + widths[i] / 2,
+        y,
+        w: widths[i],
+        alive: prev[i] ? prev[i].alive : true,
+        phase: Math.random() * Math.PI * 2,
+      };
+      x += widths[i] + gap;
+      return l;
+    });
+  }
+  layout();
+  window.addEventListener("resize", () => { if (!opened) layout(); });
+
+  // ---- explode a letter into pixel debris ----
+  function explode(l) {
+    l.alive = false;
     const { accent, accentInk } = theme();
 
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = accent;
-    ctx.fillRect(0, 0, W, H);
+    // sample the letter's pixels on an offscreen canvas
+    const pad = fontSize * 0.2;
+    const ow = Math.ceil(l.w + pad * 2), oh = Math.ceil(fontSize * 1.2);
+    const off = document.createElement("canvas");
+    off.width = ow; off.height = oh;
+    const octx = off.getContext("2d");
+    octx.font = `800 ${fontSize}px Archivo, sans-serif`;
+    octx.textAlign = "center";
+    octx.textBaseline = "middle";
+    octx.fillStyle = "#fff";
+    octx.fillText(l.ch, ow / 2, oh / 2);
+    const data = octx.getImageData(0, 0, ow, oh).data;
 
-    // cover art: name + hint
-    ctx.fillStyle = accentInk;
-    ctx.textAlign = "center";
-
-    ctx.font = `800 ${Math.min(W * 0.09, 150 * dpr)}px Archivo, sans-serif`;
-    ctx.fillText("PRATHVI", W / 2, H / 2 - 10 * dpr);
-
-    ctx.font = `500 ${15 * dpr}px "Space Grotesk", sans-serif`;
-    ctx.globalAlpha = 0.75;
-    ctx.fillText("scratch anywhere to enter", W / 2, H / 2 + 42 * dpr);
-    ctx.globalAlpha = 1;
-  }
-  paintCover();
-  window.addEventListener("resize", () => { if (!opened) paintCover(); });
-
-  const brush = Math.max(innerWidth, innerHeight) * 0.07 * dpr;
-  let last = null;
-
-  function scratch(x, y) {
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineWidth = brush * 2;
-    ctx.lineCap = "round";
-    ctx.beginPath();
-    if (last) ctx.moveTo(last.x, last.y); else ctx.moveTo(x, y);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    last = { x, y };
-  }
-
-  // sample the alpha channel on a coarse grid to estimate % cleared
-  function cleared() {
-    const step = 24;
-    const data = ctx.getImageData(0, 0, W, H).data;
-    let clear = 0, total = 0;
-    for (let y = 0; y < H; y += step * dpr) {
-      for (let x = 0; x < W; x += step * dpr) {
-        total++;
-        if (data[((y | 0) * W + (x | 0)) * 4 + 3] < 128) clear++;
+    const step = Math.max(4, Math.round(fontSize / 26));
+    for (let py = 0; py < oh; py += step) {
+      for (let px = 0; px < ow; px += step) {
+        if (data[(py * ow + px) * 4 + 3] > 128) {
+          const gx = l.x - ow / 2 + px;
+          const gy = l.y - oh / 2 + py;
+          const ang = Math.atan2(gy - l.y, gx - l.x) + (Math.random() - 0.5);
+          const spd = (2 + Math.random() * 9) * dpr;
+          particles.push({
+            x: gx, y: gy,
+            vx: Math.cos(ang) * spd,
+            vy: Math.sin(ang) * spd - 3 * dpr,
+            s: step * (0.55 + Math.random() * 0.5),
+            rot: Math.random() * Math.PI,
+            vr: (Math.random() - 0.5) * 0.3,
+            life: 1,
+            color: Math.random() < 0.85 ? accentInk : accent,
+          });
+        }
       }
     }
-    return clear / total;
+
+    waves.push({ x: l.x, y: l.y, r: fontSize * 0.2, alpha: 0.9 });
+    shake = 14 * dpr;
+
+    const left = letters.filter((k) => k.alive).length;
+    bar.style.width = `${((NAME.length - left) / NAME.length) * 100}%`;
+    if (left === 0) setTimeout(open, 550); // let the debris fly first
   }
+
+  function hit(px, py) {
+    for (const l of letters) {
+      if (!l.alive) continue;
+      if (Math.abs(px - l.x) < l.w * 0.65 && Math.abs(py - l.y) < fontSize * 0.6) {
+        explode(l);
+        return;
+      }
+    }
+  }
+
+  // ---- render loop ----
+  let t = 0;
+  function draw() {
+    if (opened) return;
+    t += 0.016;
+    const { accent, accentInk } = theme();
+
+    // screen shake
+    const sx = (Math.random() - 0.5) * shake;
+    const sy = (Math.random() - 0.5) * shake;
+    shake *= 0.86;
+
+    ctx.setTransform(1, 0, 0, 1, sx, sy);
+    ctx.fillStyle = accent;
+    ctx.fillRect(-20, -20, W + 40, H + 40);
+
+    // hint
+    ctx.fillStyle = accentInk;
+    ctx.textAlign = "center";
+    ctx.globalAlpha = 0.7;
+    ctx.font = `500 ${15 * dpr}px "Space Grotesk", sans-serif`;
+    ctx.fillText("smash the letters to enter", W / 2, H / 2 + fontSize * 0.85);
+    ctx.globalAlpha = 1;
+
+    // letters: float, and tremble when the cursor is near
+    ctx.font = `800 ${fontSize}px Archivo, sans-serif`;
+    ctx.textBaseline = "middle";
+    for (const l of letters) {
+      if (!l.alive) continue;
+      const near =
+        Math.abs(mouse.x - l.x) < l.w * 0.9 &&
+        Math.abs(mouse.y - l.y) < fontSize * 0.8;
+      const wob = Math.sin(t * 2 + l.phase) * fontSize * 0.02;
+      const tx = near ? (Math.random() - 0.5) * 6 * dpr : 0;
+      const ty = near ? (Math.random() - 0.5) * 6 * dpr : 0;
+      ctx.save();
+      ctx.translate(l.x + tx, l.y + wob + ty);
+      if (near) ctx.rotate((Math.random() - 0.5) * 0.04);
+      ctx.fillStyle = accentInk;
+      ctx.fillText(l.ch, 0, 0);
+      ctx.restore();
+    }
+
+    // debris
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.22 * dpr;         // gravity
+      p.vx *= 0.99;
+      p.rot += p.vr;
+      p.life -= 0.008;
+      if (p.life <= 0 || p.y > H + 40) { particles.splice(i, 1); continue; }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.min(1, p.life * 1.6);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+
+    // shockwave rings
+    for (let i = waves.length - 1; i >= 0; i--) {
+      const w = waves[i];
+      w.r += 18 * dpr;
+      w.alpha *= 0.9;
+      if (w.alpha < 0.02) { waves.splice(i, 1); continue; }
+      ctx.strokeStyle = accentInk;
+      ctx.globalAlpha = w.alpha;
+      ctx.lineWidth = 3 * dpr;
+      ctx.beginPath();
+      ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(draw);
+  }
+  draw();
 
   function open() {
     if (opened) return;
@@ -81,21 +200,10 @@
     gateEl.addEventListener("animationend", () => gateEl.remove());
   }
 
-  let down = false, moves = 0;
-  const pos = (e) => ({ x: e.clientX * dpr, y: e.clientY * dpr });
-
-  gateEl.addEventListener("pointerdown", (e) => { down = true; last = null; scratch(pos(e).x, pos(e).y); });
   gateEl.addEventListener("pointermove", (e) => {
-    if (!down || opened) return;
-    const p = pos(e);
-    scratch(p.x, p.y);
-    if (++moves % 6 === 0) { // check progress every few strokes
-      const c = cleared();
-      bar.style.width = `${Math.min(c / 0.45, 1) * 100}%`;
-      if (c > 0.45) open();
-    }
+    mouse = { x: e.clientX * dpr, y: e.clientY * dpr };
   });
-  window.addEventListener("pointerup", () => { down = false; last = null; });
+  gateEl.addEventListener("pointerdown", (e) => hit(e.clientX * dpr, e.clientY * dpr));
 
   skip.addEventListener("click", open);
   window.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === "Escape") open(); });
