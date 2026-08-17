@@ -2,6 +2,107 @@
    Prathvi portfolio — 3D interactions
    ========================================================== */
 
+// ---------- 0. ENTRY GATE : scratch to enter ----------
+(function gate() {
+  const gateEl = document.getElementById("gate");
+  const cv = document.getElementById("gateCanvas");
+  const bar = document.getElementById("gateBar");
+  const skip = document.getElementById("gateSkip");
+  if (!gateEl || !cv) return;
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const styles = getComputedStyle(document.documentElement);
+  const theme = () => ({
+    accent: styles.getPropertyValue("--accent").trim(),
+    accentInk: styles.getPropertyValue("--accent-ink").trim(),
+  });
+
+  const ctx = cv.getContext("2d");
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let W, H, opened = false;
+
+  function paintCover() {
+    W = cv.width = innerWidth * dpr;
+    H = cv.height = innerHeight * dpr;
+    const { accent, accentInk } = theme();
+
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = accent;
+    ctx.fillRect(0, 0, W, H);
+
+    // cover art: name + hint
+    ctx.fillStyle = accentInk;
+    ctx.textAlign = "center";
+
+    ctx.font = `800 ${Math.min(W * 0.09, 150 * dpr)}px Archivo, sans-serif`;
+    ctx.fillText("PRATHVI", W / 2, H / 2 - 10 * dpr);
+
+    ctx.font = `500 ${15 * dpr}px "Space Grotesk", sans-serif`;
+    ctx.globalAlpha = 0.75;
+    ctx.fillText("scratch anywhere to enter", W / 2, H / 2 + 42 * dpr);
+    ctx.globalAlpha = 1;
+  }
+  paintCover();
+  window.addEventListener("resize", () => { if (!opened) paintCover(); });
+
+  const brush = Math.max(innerWidth, innerHeight) * 0.07 * dpr;
+  let last = null;
+
+  function scratch(x, y) {
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.lineWidth = brush * 2;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    if (last) ctx.moveTo(last.x, last.y); else ctx.moveTo(x, y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    last = { x, y };
+  }
+
+  // sample the alpha channel on a coarse grid to estimate % cleared
+  function cleared() {
+    const step = 24;
+    const data = ctx.getImageData(0, 0, W, H).data;
+    let clear = 0, total = 0;
+    for (let y = 0; y < H; y += step * dpr) {
+      for (let x = 0; x < W; x += step * dpr) {
+        total++;
+        if (data[((y | 0) * W + (x | 0)) * 4 + 3] < 128) clear++;
+      }
+    }
+    return clear / total;
+  }
+
+  function open() {
+    if (opened) return;
+    opened = true;
+    gateEl.classList.add("is-opening");
+    document.body.classList.remove("is-locked"); // unleash all reveal animations
+    gateEl.addEventListener("animationend", () => gateEl.remove());
+  }
+
+  let down = false, moves = 0;
+  const pos = (e) => ({ x: e.clientX * dpr, y: e.clientY * dpr });
+
+  gateEl.addEventListener("pointerdown", (e) => { down = true; last = null; scratch(pos(e).x, pos(e).y); });
+  gateEl.addEventListener("pointermove", (e) => {
+    if (!down || opened) return;
+    const p = pos(e);
+    scratch(p.x, p.y);
+    if (++moves % 6 === 0) { // check progress every few strokes
+      const c = cleared();
+      bar.style.width = `${Math.min(c / 0.45, 1) * 100}%`;
+      if (c > 0.45) open();
+    }
+  });
+  window.addEventListener("pointerup", () => { down = false; last = null; });
+
+  skip.addEventListener("click", open);
+  window.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === "Escape") open(); });
+
+  if (reduced) open(); // don't gate reduced-motion users
+})();
+
 // ---------- 1. Split headline words into chars for 3D flip reveal ----------
 document.querySelectorAll(".word").forEach((word) => {
   const base = parseFloat(word.dataset.delay || 0);
