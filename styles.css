@@ -104,6 +104,36 @@ body::before {
   align-items: center;
   gap: 14px;
   pointer-events: none;
+  color: #e8e6f0;
+}
+
+.gate__hint {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  min-height: 1.2em;
+}
+
+/* detonation whiteout */
+.gate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gate.is-flashing::after {
+  animation: gateFlash 1s ease-out forwards;
+}
+
+@keyframes gateFlash {
+  0%   { opacity: 0; }
+  12%  { opacity: 0.95; }
+  100% { opacity: 0; }
 }
 
 .gate__progress {

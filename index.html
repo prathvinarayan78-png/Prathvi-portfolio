@@ -13,9 +13,10 @@
 <body class="is-locked">
 
   <!-- ====== ENTRY GATE (scratch to enter) ====== -->
-  <div class="gate" id="gate" role="dialog" aria-label="Smash the letters to enter the site">
+  <div class="gate" id="gate" role="dialog" aria-label="Hold to detonate and enter the site">
     <canvas id="gateCanvas"></canvas>
     <div class="gate__ui">
+      <p class="gate__hint" id="gateHint"></p>
       <div class="gate__progress" aria-hidden="true"><i id="gateBar"></i></div>
       <button class="gate__skip" id="gateSkip">skip → enter</button>
     </div>
