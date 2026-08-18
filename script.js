@@ -37,8 +37,8 @@ if (finePointer && !reducedMotion) {
     (e) => {
       mouseX = e.clientX / window.innerWidth;
       mouseY = e.clientY / window.innerHeight;
-      targetRY = (mouseX - 0.5) * 7;   // rotateY
-      targetRX = (0.5 - mouseY) * 5;   // rotateX
+      targetRY = (mouseX - 0.5) * 10;  // rotateY — deeper immersive tilt
+      targetRX = (0.5 - mouseY) * 7;   // rotateX
     },
     { passive: true }
   );
@@ -108,72 +108,6 @@ toggle?.addEventListener("click", (e) => {
   root.dataset.theme = next;
   localStorage.setItem("prathvi-theme", next);
 });
-
-// ---------- 6. Drifting particle field ----------
-const canvas = document.getElementById("particles");
-if (canvas && !reducedMotion) {
-  const ctx = canvas.getContext("2d");
-  let W, H, dots;
-
-  const accent = () =>
-    getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
-
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    const n = Math.min(70, Math.floor(W / 22));
-    dots = Array.from({ length: n }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: 0.6 + Math.random() * 1.8,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      depth: 0.3 + Math.random() * 0.7, // parallax factor + alpha
-    }));
-  }
-  resize();
-  window.addEventListener("resize", resize, { passive: true });
-
-  (function draw() {
-    ctx.clearRect(0, 0, W, H);
-    const col = accent();
-    const px = (mouseX - 0.5) * 30;
-    const py = (mouseY - 0.5) * 30;
-
-    for (const d of dots) {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < -10) d.x = W + 10; else if (d.x > W + 10) d.x = -10;
-      if (d.y < -10) d.y = H + 10; else if (d.y > H + 10) d.y = -10;
-
-      ctx.globalAlpha = 0.12 + d.depth * 0.25;
-      ctx.fillStyle = col;
-      ctx.beginPath();
-      ctx.arc(d.x + px * d.depth, d.y + py * d.depth, d.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // connect close pairs with faint lines
-    ctx.globalAlpha = 1;
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const a = dots[i], b = dots[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist2 = dx * dx + dy * dy;
-        if (dist2 < 110 * 110) {
-          ctx.strokeStyle = col;
-          ctx.globalAlpha = 0.05 * (1 - dist2 / (110 * 110));
-          ctx.beginPath();
-          ctx.moveTo(a.x + px * a.depth, a.y + py * a.depth);
-          ctx.lineTo(b.x + px * b.depth, b.y + py * b.depth);
-          ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  })();
-}
 
 // ---------- 7. Scroll parallax on strips ----------
 const strips = document.querySelectorAll(".strip");
