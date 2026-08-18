@@ -109,6 +109,69 @@ toggle?.addEventListener("click", (e) => {
   localStorage.setItem("prathvi-theme", next);
 });
 
+// ---------- 6. NAV: magnetic links, letter waves, smart hide, clock ----------
+const nav = document.getElementById("nav");
+
+// split nav labels into chars for the hover wave
+document.querySelectorAll("[data-wave]").forEach((el) => {
+  const frag = document.createDocumentFragment();
+  let i = 0;
+  el.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      [...node.textContent].forEach((ch) => {
+        const s = document.createElement("span");
+        s.className = "wchar";
+        s.style.setProperty("--wi", i++);
+        s.textContent = ch === " " ? "\u00A0" : ch;
+        frag.appendChild(s);
+      });
+    } else {
+      node.style?.setProperty("--wi", i++);
+      frag.appendChild(node.cloneNode(true));
+    }
+  });
+  el.replaceChildren(frag);
+});
+
+// magnetic pull toward the cursor
+if (finePointer && !reducedMotion) {
+  document.querySelectorAll(".magnetic").forEach((el) => {
+    el.addEventListener("mousemove", (e) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate(${x * 0.28}px, ${y * 0.34}px)`;
+    });
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "";
+    });
+  });
+}
+
+// glass capsule after 40px; hide on scroll down, show on scroll up
+let lastY = 0;
+window.addEventListener(
+  "scroll",
+  () => {
+    const y = window.scrollY;
+    nav.classList.toggle("is-scrolled", y > 40);
+    nav.classList.toggle("is-hidden", y > 260 && y > lastY);
+    lastY = y;
+  },
+  { passive: true }
+);
+
+// live local time badge (Asia/Kolkata)
+const navTime = document.getElementById("navTime");
+if (navTime) {
+  const fmt = new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata",
+  });
+  const tickClock = () => (navTime.textContent = `DEL ${fmt.format(new Date())}`);
+  tickClock();
+  setInterval(tickClock, 30000);
+}
+
 // ---------- 7. Scroll parallax on strips ----------
 const strips = document.querySelectorAll(".strip");
 let ticking = false;
