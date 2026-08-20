@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-surface: #1a1a1a;
+  --text-primary: #f5f5f5;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --accent-blue: #4488ff;
+  --accent-amber: #ffaa33;
+  --accent-chrome: #c0c0c0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  overscroll-behavior: none;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+/* hide scrollbars, noth.in style */
+::-webkit-scrollbar { display: none; }
+html { scrollbar-width: none; -ms-overflow-style: none; }
+
+::selection { background: var(--accent-blue); color: #0a0a0a; }
+
+.font-display { font-family: "Syne", sans-serif; }
+.font-mono { font-family: "IBM Plex Mono", monospace; }
+
+/* fluid display type */
+.text-giant {
+  font-size: clamp(3.2rem, 12.5vw, 13rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+/* grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* text reveal lines */
+[data-line] {
+  display: block;
+  overflow: hidden;
+}
+[data-line] > span {
+  display: block;
+  transform: translateY(110%);
+}
+
+/* marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
