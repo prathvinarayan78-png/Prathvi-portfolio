@@ -3,151 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prathvi — Graphic Designer, Editor &amp; Agentic Engineer</title>
-  <meta name="description" content="Portfolio of Prathvi — Graphic Designer, Editor and Agentic Engineer." />
+  <title>PRATHVI — Select Your Operative</title>
+  <meta name="description" content="Prathvi — Graphic Designer, Editor & Agentic Engineer. A portfolio built like a game." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Chakra+Petch:wght@400;500;600;700&family=Rye&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="game.css" />
 </head>
 <body class="is-locked">
 
-  <!-- ====== ENTRY GATE (scratch to enter) ====== -->
-  <div class="gate" id="gate" role="dialog" aria-label="Hold to detonate and enter the site">
+  <!-- ====== BOOT GATE (hold to deploy) ====== -->
+  <div class="gate" id="gate" role="dialog" aria-label="Hold to deploy and enter the site">
     <canvas id="gateCanvas"></canvas>
     <div class="gate__ui">
       <p class="gate__hint" id="gateHint"></p>
       <div class="gate__progress" aria-hidden="true"><i id="gateBar"></i></div>
-      <button class="gate__skip" id="gateSkip">skip → enter</button>
+      <button class="gate__skip" id="gateSkip">skip intro ⏎</button>
     </div>
   </div>
 
-  <!-- ====== 3D BACKGROUND SCENE ====== -->
-  <div class="scene" aria-hidden="true">
-    <div class="glow" id="glow"></div>
-    <canvas id="hero3d"></canvas>
+  <!-- ====== HUD ====== -->
+  <div class="hud" aria-hidden="true">
+    <div class="hud__top">
+      <div class="hud__player">
+        <span class="hud__avatar">P</span>
+        <div>
+          <b>PRATHVI_ODR</b>
+          <i>LVL 99 · CREATIVE CLASS</i>
+        </div>
+      </div>
+      <div class="hud__objective" id="hudObjective">OBJECTIVE: EXPLORE THE FRONTIER</div>
+    </div>
+    <div class="hud__bottom">
+      <div class="hud__xp"><i id="xpFill"></i></div>
+      <span class="hud__xp-label" id="xpLabel">0% EXPLORED</span>
+    </div>
+    <!-- cinematic letterbox bars -->
+    <div class="letterbox letterbox--top"></div>
+    <div class="letterbox letterbox--bottom"></div>
   </div>
 
-  <!-- ============ NAV ============ -->
-  <header class="nav" id="nav">
-    <a class="nav__logo magnetic" href="#">
-      <span class="nav__mark">P</span>
-      <span class="nav__name" data-wave>prathvi<span class="nav__dot">.</span>design</span>
-    </a>
-    <nav class="nav__links">
-      <span class="nav__time" id="navTime" title="my local time">DEL --:--</span>
-      <a href="#work" class="nav__link magnetic" data-wave>Work</a>
-      <a href="#about" class="nav__link magnetic" data-wave>About</a>
-      <button class="theme-toggle magnetic" id="themeToggle" aria-label="Toggle light / dark mode">
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <circle cx="12" cy="12" r="4.5"/>
-          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/>
-        </svg>
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
-        </svg>
-      </button>
-      <a href="#contact" class="nav__cta magnetic"><span data-wave>Let's talk</span></a>
-    </nav>
-  </header>
+  <!-- ====== MAIN MENU (hero) ====== -->
+  <section class="menu" id="top">
+    <div class="menu__bg parallax" data-plx="0.25" style="--img:url('assets/game/bg-frontier.jpg')"></div>
+    <div class="menu__vignette"></div>
+    <canvas id="dust"></canvas>
 
-  <!-- ============ HERO ============ -->
-  <main class="hero">
-    <div class="hero__tilt" id="tilt">
-
-      <div class="hero__live">
-        <span class="live-dot"></span>
-        <span class="live-label">LIVE</span>
-        <span class="live-sep">/</span>
-        <a class="live-link" href="#work">FROM THE STUDIO&nbsp;↗</a>
-      </div>
-
-      <h1 class="hero__headline" aria-label="Make ideas move people">
-        <!-- Line 1 : word + strip -->
-        <span class="line">
-          <span class="word" data-delay="0.05">Make</span>
-          <span class="strip reveal3d" style="--d:.4s" data-speed="34">
-            <span class="strip__track">
-              <img src="assets/tiles/tile-1.jpg" alt="Poster design work" />
-              <img src="assets/tiles/tile-4.jpg" alt="Brand identity work" />
-              <img src="assets/tiles/tile-7.jpg" alt="Illustration poster" />
-              <img src="assets/tiles/tile-5.jpg" alt="3D render artwork" />
-              <img src="assets/tiles/tile-1.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-4.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-7.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-5.jpg" alt="" aria-hidden="true" />
-            </span>
-          </span>
-          <span class="word" data-delay="0.2">ideas</span>
-        </span>
-
-        <!-- Line 2 : strip + word -->
-        <span class="line">
-          <span class="strip reveal3d" style="--d:.55s" data-speed="46" data-reverse>
-            <span class="strip__track">
-              <img src="assets/tiles/tile-2.jpg" alt="Video editing timeline" />
-              <img src="assets/tiles/tile-8.jpg" alt="Motion graphics frame" />
-              <img src="assets/tiles/tile-3.jpg" alt="AI agent graph" />
-              <img src="assets/tiles/tile-6.jpg" alt="Code editor" />
-              <img src="assets/tiles/tile-2.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-8.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-3.jpg" alt="" aria-hidden="true" />
-              <img src="assets/tiles/tile-6.jpg" alt="" aria-hidden="true" />
-            </span>
-          </span>
-          <span class="word word--italic" data-delay="0.35">move</span>
-          <span class="word" data-delay="0.5">people.</span>
-        </span>
+    <div class="menu__content">
+      <p class="menu__studio rv" data-rv>AN INTERACTIVE PORTFOLIO EXPERIENCE</p>
+      <h1 class="menu__title">
+        <span class="rv" data-rv style="--rvd:.1s">PRATHVI</span>
       </h1>
+      <p class="menu__sub rv" data-rv style="--rvd:.25s">GRAPHIC DESIGNER &nbsp;·&nbsp; EDITOR &nbsp;·&nbsp; AGENTIC ENGINEER</p>
 
-      <div class="hero__foot">
-        <p class="hero__intro reveal" style="--d:.85s">
-          I'm <strong>Prathvi</strong> — I design what catches the eye,
-          edit what holds it, and engineer the agents that scale it.
-        </p>
+      <nav class="menu__list rv" data-rv style="--rvd:.4s">
+        <a class="menu__item" href="#select"><i>▸</i> NEW GAME <em>— meet the operatives</em></a>
+        <a class="menu__item" href="#ch1"><i>▸</i> CAMPAIGN <em>— play the chapters</em></a>
+        <a class="menu__item" href="#contact"><i>▸</i> CO-OP <em>— work with me</em></a>
+      </nav>
 
-        <ul class="hero__roles">
-          <li class="role reveal3d-card" style="--d:.95s"><span class="role__num">01</span>Graphic Designer</li>
-          <li class="role reveal3d-card" style="--d:1.05s"><span class="role__num">02</span>Editor</li>
-          <li class="role reveal3d-card" style="--d:1.15s"><span class="role__num">03</span>Agentic Engineer</li>
-        </ul>
-      </div>
-
-    </div><!-- /hero__tilt -->
-
-    <a class="hero__scroll reveal" style="--d:1.3s" href="#work" aria-label="Scroll to work">
-      <span>Scroll</span>
-      <svg width="14" height="18" viewBox="0 0 14 18" fill="none" aria-hidden="true">
-        <path d="M7 1v14M1.5 10.5 7 16l5.5-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </main>
-
-  <!-- ============ TICKER ============ -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker__track">
-      <span>Graphic Design</span><i>✦</i>
-      <span>Video Editing</span><i>✦</i>
-      <span>Agentic Engineering</span><i>✦</i>
-      <span>Brand Identity</span><i>✦</i>
-      <span>Motion</span><i>✦</i>
-      <span>AI Workflows</span><i>✦</i>
-      <span>Graphic Design</span><i>✦</i>
-      <span>Video Editing</span><i>✦</i>
-      <span>Agentic Engineering</span><i>✦</i>
-      <span>Brand Identity</span><i>✦</i>
-      <span>Motion</span><i>✦</i>
-      <span>AI Workflows</span><i>✦</i>
+      <p class="menu__hint rv" data-rv style="--rvd:.6s">⌄ &nbsp;SCROLL TO BEGIN&nbsp; ⌄</p>
     </div>
-  </div>
-
-  <!-- Placeholder anchor for future projects section -->
-  <section id="work" class="work-placeholder">
-    <p>Selected work — coming soon.</p>
   </section>
 
+  <!-- ====== OPERATIVE SELECT ====== -->
+  <section class="select" id="select">
+    <header class="select__head rv" data-rv>
+      <p class="kicker">// CHARACTER SELECT</p>
+      <h2>CHOOSE YOUR OPERATIVE</h2>
+      <p class="select__note">four loadouts. one player. every skill is me.</p>
+    </header>
+
+    <div class="roster">
+      <article class="op rv" data-rv data-op="ghostline" style="--rvd:.05s">
+        <div class="op__card" data-tilt>
+          <img src="assets/game/char-operator.jpg" alt="Ghostline — tactical operator character" />
+          <div class="op__scan"></div>
+          <div class="op__grad"></div>
+          <div class="op__tag">
+            <b>GHOSTLINE</b>
+            <i>AGENTIC ENGINEER</i>
+          </div>
+        </div>
+        <div class="op__stats">
+          <div class="stat"><span>PRECISION</span><div class="stat__bar"><i style="--v:96%"></i></div></div>
+          <div class="stat"><span>AUTOMATION</span><div class="stat__bar"><i style="--v:92%"></i></div></div>
+          <div class="stat"><span>STEALTH SHIPPING</span><div class="stat__bar"><i style="--v:88%"></i></div></div>
+          <p class="op__bio">Runs silent, ships loud. Builds AI agents and pipelines that clear the objective while you sleep.</p>
+        </div>
+      </article>
+
+      <article class="op rv" data-rv data-op="skybloom" style="--rvd:.15s">
+        <div class="op__card" data-tilt>
+          <img src="assets/game/char-builder.jpg" alt="Skybloom — colorful builder character" />
+          <div class="op__scan"></div>
+          <div class="op__grad"></div>
+          <div class="op__tag">
+            <b>SKYBLOOM</b>
+            <i>GRAPHIC DESIGNER</i>
+          </div>
+        </div>
+        <div class="op__stats">
+          <div class="stat"><span>COLOR THEORY</span><div class="stat__bar"><i style="--v:95%"></i></div></div>
+          <div class="stat"><span>BUILD SPEED</span><div class="stat__bar"><i style="--v:90%"></i></div></div>
+          <div class="stat"><span>STYLE METER</span><div class="stat__bar"><i style="--v:97%"></i></div></div>
+          <p class="op__bio">Drops in, builds a brand before the storm closes. Posters, identities, layouts — full victory royale.</p>
+        </div>
+      </article>
+
+      <article class="op rv" data-rv data-op="lastcut" style="--rvd:.25s">
+        <div class="op__card" data-tilt>
+          <img src="assets/game/char-survivor.jpg" alt="Lastcut — survivor storyteller character" />
+          <div class="op__scan"></div>
+          <div class="op__grad"></div>
+          <div class="op__tag">
+            <b>LASTCUT</b>
+            <i>EDITOR</i>
+          </div>
+        </div>
+        <div class="op__stats">
+          <div class="stat"><span>STORYTELLING</span><div class="stat__bar"><i style="--v:94%"></i></div></div>
+          <div class="stat"><span>PACING</span><div class="stat__bar"><i style="--v:93%"></i></div></div>
+          <div class="stat"><span>EMOTIONAL DMG</span><div class="stat__bar"><i style="--v:91%"></i></div></div>
+          <p class="op__bio">Survives any timeline. Cuts through hours of footage to find the moments that hit like a brick.</p>
+        </div>
+      </article>
+
+      <article class="op rv" data-rv data-op="deadline" style="--rvd:.35s">
+        <div class="op__card" data-tilt>
+          <img src="assets/game/char-outlaw.jpg" alt="Deadline — outlaw all-rounder character" />
+          <div class="op__scan"></div>
+          <div class="op__grad"></div>
+          <div class="op__tag">
+            <b>DEADLINE</b>
+            <i>THE ALL-ROUNDER</i>
+          </div>
+        </div>
+        <div class="op__stats">
+          <div class="stat"><span>DEAD EYE FOCUS</span><div class="stat__bar"><i style="--v:98%"></i></div></div>
+          <div class="stat"><span>HONOR</span><div class="stat__bar"><i style="--v:89%"></i></div></div>
+          <div class="stat"><span>GRIT</span><div class="stat__bar"><i style="--v:96%"></i></div></div>
+          <p class="op__bio">The one they call when the job must get done. Slows down time, never misses a deadline. Boah.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="select__status" id="selectStatus">HOVER TO INSPECT · CLICK TO SELECT</p>
+  </section>
+
+  <!-- ====== CAMPAIGN CHAPTERS ====== -->
+  <section class="chapter ch--warzone" id="ch1">
+    <div class="chapter__bg parallax" data-plx="0.3" style="--img:url('assets/game/bg-warzone.jpg')"></div>
+    <div class="chapter__inner">
+      <p class="chapter__num rv" data-rv>CHAPTER I</p>
+      <h2 class="chapter__title rv" data-rv style="--rvd:.1s">WARZONE DISCIPLINE</h2>
+      <p class="chapter__copy rv" data-rv style="--rvd:.2s">
+        Deadlines are a gunfight. I move like an operator — briefs decoded,
+        assets deployed, zero wasted motion. Precision isn't a skill, it's a rule of engagement.
+      </p>
+      <div class="chapter__loadout rv" data-rv style="--rvd:.3s">
+        <span>LOADOUT:</span> <b>FIGMA</b> <b>PHOTOSHOP</b> <b>ILLUSTRATOR</b>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter ch--island" id="ch2">
+    <div class="chapter__bg parallax" data-plx="0.3" style="--img:url('assets/game/bg-island.jpg')"></div>
+    <div class="chapter__inner chapter__inner--right">
+      <p class="chapter__num rv" data-rv>CHAPTER II</p>
+      <h2 class="chapter__title rv" data-rv style="--rvd:.1s">BUILD MODE</h2>
+      <p class="chapter__copy rv" data-rv style="--rvd:.2s">
+        Creativity under pressure. Give me a blank canvas and ninety seconds —
+        I'll build you a brand with color, chaos and a skybase of ideas before the storm hits.
+      </p>
+      <div class="chapter__loadout rv" data-rv style="--rvd:.3s">
+        <span>LOADOUT:</span> <b>BRANDING</b> <b>POSTERS</b> <b>SOCIAL CREATIVE</b>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter ch--lastlight" id="ch3">
+    <div class="chapter__bg parallax" data-plx="0.3" style="--img:url('assets/game/bg-lastlight.jpg')"></div>
+    <div class="chapter__inner">
+      <p class="chapter__num rv" data-rv>CHAPTER III</p>
+      <h2 class="chapter__title rv" data-rv style="--rvd:.1s">THE LAST LIGHT</h2>
+      <p class="chapter__copy rv" data-rv style="--rvd:.2s">
+        Editing is survival storytelling. In the ruins of raw footage I look for
+        what's still alive — the pause, the glance, the beat that makes people feel something.
+      </p>
+      <div class="chapter__loadout rv" data-rv style="--rvd:.3s">
+        <span>LOADOUT:</span> <b>PREMIERE</b> <b>AFTER EFFECTS</b> <b>DAVINCI</b>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter ch--frontier" id="ch4">
+    <div class="chapter__bg parallax" data-plx="0.3" style="--img:url('assets/game/bg-frontier.jpg')"></div>
+    <div class="chapter__inner chapter__inner--center">
+      <p class="chapter__num rv" data-rv>FINAL CHAPTER</p>
+      <h2 class="chapter__title chapter__title--west rv" data-rv style="--rvd:.1s">THE&nbsp;FRONTIER</h2>
+      <p class="chapter__copy rv" data-rv style="--rvd:.2s">
+        AI agents are the new west — wide open, lawless, full of gold.
+        I ride it daily: building agentic workflows that hunt, gather and deliver.
+        Slow is smooth, smooth is fast, and the work always gets done.
+      </p>
+      <div class="chapter__loadout rv" data-rv style="--rvd:.3s">
+        <span>LOADOUT:</span> <b>AI AGENTS</b> <b>PYTHON</b> <b>AUTOMATION</b>
+      </div>
+      <p class="deadeye rv" data-rv style="--rvd:.45s">— DEAD EYE ACTIVATED —</p>
+    </div>
+  </section>
+
+  <!-- ====== CO-OP / CONTACT ====== -->
+  <section class="coop" id="contact">
+    <div class="coop__inner rv" data-rv>
+      <p class="kicker">// CO-OP LOBBY</p>
+      <h2>READY TO PARTY UP?</h2>
+      <p>Your project is the mission. My skills are the loadout. Send the invite.</p>
+      <a class="coop__btn" href="mailto:hello@prathvi.design">SEND PARTY INVITE ▸</a>
+      <p class="coop__meta">RESPONSE TIME: &lt; 24 HRS · SERVER: DELHI, IN</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 PRATHVI — ALL CHARACTERS ORIGINAL, ALL INSPIRATION RESPECTFULLY BORROWED</span>
+  </footer>
+
   <script src="gate.js"></script>
-  <script src="hero3d.js"></script>
-  <script src="script.js?v=2"></script>
+  <script src="game.js"></script>
 </body>
 </html>

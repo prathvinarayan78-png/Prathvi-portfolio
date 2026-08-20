@@ -38,7 +38,7 @@
 
   async function init(THREE) {
     const rs = getComputedStyle(document.documentElement);
-    const accent = new THREE.Color(rs.getPropertyValue("--accent").trim() || "#c8ff3e");
+    const accent = new THREE.Color("#d9a441");
     const red = new THREE.Color("#ff3728");
 
     // ---------- renderer / scene / camera ----------
@@ -60,11 +60,11 @@
     });
 
     // ---------- sample "PRATHVI" glyphs into 3D targets ----------
-    try { await document.fonts.load('800 200px Archivo'); } catch {}
+    try { await document.fonts.load('900 190px Cinzel'); } catch {}
     const tc = document.createElement("canvas");
     tc.width = 1400; tc.height = 320;
     const tctx = tc.getContext("2d");
-    tctx.font = '800 210px Archivo, sans-serif';
+    tctx.font = '900 190px Cinzel, serif';
     tctx.textAlign = "center";
     tctx.textBaseline = "middle";
     tctx.fillStyle = "#fff";
@@ -137,7 +137,7 @@
     let mx = 0, my = 0;
     let warp = 1;
 
-    hint.textContent = "hold anywhere to detonate";
+    hint.textContent = "hold anywhere to deploy";
 
     // ---------- input ----------
     gateEl.addEventListener("pointermove", (e) => {
@@ -180,8 +180,8 @@
           : Math.max(0, charge - dt / CHARGE_TIME);
         bar.style.width = `${charge * 100}%`;
         hint.textContent = holding
-          ? (charge > 0.65 ? "..." : "keep holding...")
-          : "hold anywhere to detonate";
+          ? (charge > 0.65 ? "deploying..." : "keep holding...")
+          : "hold anywhere to deploy";
         if (charge >= 1) detonate();
 
         // assemble + idle wave + charge rumble
