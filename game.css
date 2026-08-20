@@ -273,6 +273,34 @@ body.is-cinematic .letterbox { height: clamp(28px, 5vh, 54px); }
 }
 .op:hover .op__card img { transform: scale(1.07); filter: saturate(1.1); }
 
+/* live 3D character viewport */
+.op__view {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: pan-y;
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(217, 164, 65, 0.14), transparent 55%),
+    linear-gradient(to top, #0c0a07, #191510 60%, #241d14);
+}
+.op__view:active { cursor: grabbing; }
+.op[data-op="ghostline"] .op__view {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(159, 216, 203, 0.13), transparent 55%),
+    linear-gradient(to top, #07090a, #101517 60%, #161d20);
+}
+.op[data-op="skybloom"] .op__view {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(176, 110, 240, 0.16), transparent 55%),
+    linear-gradient(to top, #0b0812, #171026 60%, #221740);
+}
+.op[data-op="lastcut"] .op__view {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(159, 181, 106, 0.13), transparent 55%),
+    linear-gradient(to top, #090a06, #12150c 60%, #1a2012);
+}
+
 .op:hover .op__card {
   border-color: var(--gold);
   box-shadow: 0 26px 60px -22px rgba(217, 164, 65, 0.35);
