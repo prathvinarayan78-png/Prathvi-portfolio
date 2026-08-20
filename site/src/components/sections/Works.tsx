@@ -19,6 +19,7 @@ function Card({ p, i }: { p: (typeof PROJECTS)[0]; i: number }) {
 
   // 3D tilt + inner image parallax
   useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return
     const el = ref.current!
     const img = el.querySelector('img')!
 
@@ -41,7 +42,7 @@ function Card({ p, i }: { p: (typeof PROJECTS)[0]; i: number }) {
   return (
     <div
       data-card
-      className={`group ${i % 2 === 1 ? 'md:mt-24' : ''}`}
+      className={`group ${i % 2 === 1 ? 'sm:mt-24' : ''}`}
       style={{ perspective: '900px' }}
     >
       <div ref={ref} {...cursor} className="relative overflow-hidden bg-[#111] border border-white/10 will-change-transform">
@@ -79,7 +80,7 @@ export function Works() {
   }, [])
 
   return (
-    <section ref={root} id="works" className="relative z-10 py-32 px-6 md:px-12 max-w-7xl mx-auto">
+    <section ref={root} id="works" className="relative z-10 py-20 md:py-32 px-5 md:px-12 max-w-7xl mx-auto">
       <div className="flex items-end justify-between mb-16">
         <TextReveal
           className="font-display font-bold text-[clamp(2.2rem,6vw,5.5rem)] leading-none"
@@ -88,7 +89,7 @@ export function Works() {
         <span className="font-mono text-[11px] tracking-[0.3em] text-white/40 mb-2 hidden md:block">(004)</span>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+      <div className="grid sm:grid-cols-2 gap-8 md:gap-12">
         {PROJECTS.map((p, i) => (
           <Card key={p.title} p={p} i={i} />
         ))}

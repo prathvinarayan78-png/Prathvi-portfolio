@@ -29,7 +29,7 @@ export function Showreel() {
   }, [])
 
   return (
-    <section ref={root} className="relative z-10 py-32 px-6 md:px-12" style={{ perspective: '1200px' }}>
+    <section ref={root} className="relative z-10 py-20 md:py-32 px-5 md:px-12" style={{ perspective: '1200px' }}>
       <TextReveal
         className="font-display font-bold text-[clamp(1.8rem,4.5vw,4rem)] leading-tight mb-16 max-w-4xl"
         lines={[

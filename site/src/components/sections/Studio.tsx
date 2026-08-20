@@ -50,7 +50,7 @@ export function Studio() {
   }, [])
 
   return (
-    <section ref={root} id="studio" className="relative z-10 py-32 px-6 md:px-12 max-w-7xl mx-auto">
+    <section ref={root} id="studio" className="relative z-10 py-20 md:py-32 px-5 md:px-12 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-16">
         <div>
           <p className="font-mono text-[11px] tracking-[0.35em] text-[#4488ff] mb-6">// THE STUDIO</p>

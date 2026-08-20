@@ -8,9 +8,9 @@ export function Footer() {
   const linkCursor = useCursorLabel('OPEN')
 
   return (
-    <footer id="contact" className="relative z-10 pt-32 pb-10 px-6 md:px-12 border-t border-white/10 bg-gradient-to-b from-transparent to-black/60">
+    <footer id="contact" className="relative z-10 pt-20 md:pt-32 pb-10 px-5 md:px-12 border-t border-white/10 bg-gradient-to-b from-transparent to-black/60">
       {/* marquee */}
-      <div className="overflow-hidden mb-20 -mx-6 md:-mx-12">
+      <div className="overflow-hidden mb-20 -mx-5 md:-mx-12">
         <div className="animate-marquee flex whitespace-nowrap font-display font-extrabold text-[clamp(3rem,9vw,9rem)] leading-none text-white/8 uppercase">
           {Array.from({ length: 4 }).map((_, i) => (
             <span key={i} className="mx-6">Let's build something — </span>

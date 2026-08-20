@@ -8,12 +8,14 @@ import { ParticleField } from './ParticleField'
 import { ScrollCamera } from './ScrollCamera'
 
 export function Scene() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
   return (
     <div className="fixed inset-0 z-0">
       <Canvas
-        camera={{ position: [0, 0, 10], fov: 50 }}
-        dpr={[1, 1.8]}
-        gl={{ antialias: true, powerPreference: 'high-performance' }}
+        camera={{ position: [0, 0, 10], fov: isMobile ? 62 : 50 }}
+        dpr={isMobile ? [1, 1.4] : [1, 1.8]}
+        gl={{ antialias: !isMobile, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={['#0a0a0a']} />
         <fog attach="fog" args={['#0a0a0a', 14, 46]} />
@@ -26,7 +28,7 @@ export function Scene() {
 
           <HeroSculpture />
           <FloatingObjects />
-          <ParticleField />
+          <ParticleField count={isMobile ? 380 : 900} />
           <ScrollCamera />
           <Environment preset="city" />
 
