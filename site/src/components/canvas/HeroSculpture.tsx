@@ -91,11 +91,14 @@ export function HeroSculpture() {
     [],
   )
 
-  useFrame(({ clock, pointer }) => {
+  useFrame(({ clock, pointer }, delta) => {
     uniforms.uTime.value = clock.elapsedTime
     if (!mesh.current) return
-    mesh.current.rotation.y = clock.elapsedTime * 0.12 + pointer.x * 0.3
-    mesh.current.rotation.x = Math.sin(clock.elapsedTime * 0.08) * 0.2 + pointer.y * 0.15
+    // damped pointer-follow — no jitter, frame-rate independent
+    const targetY = clock.elapsedTime * 0.12 + pointer.x * 0.3
+    const targetX = Math.sin(clock.elapsedTime * 0.08) * 0.2 + pointer.y * 0.15
+    mesh.current.rotation.y = THREE.MathUtils.damp(mesh.current.rotation.y, targetY, 2.5, delta)
+    mesh.current.rotation.x = THREE.MathUtils.damp(mesh.current.rotation.x, targetX, 2.5, delta)
   })
 
   return (

@@ -17,24 +17,26 @@ function Card({ p, i }: { p: (typeof PROJECTS)[0]; i: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const cursor = useCursorLabel('EXPLORE')
 
-  // 3D tilt + inner image parallax
+  // 3D tilt + inner image parallax — quickTo setters, zero tween churn
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) return
     const el = ref.current!
     const img = el.querySelector('img')!
 
+    const rotY = gsap.quickTo(el, 'rotationY', { duration: 0.6, ease: 'power3.out' })
+    const rotX = gsap.quickTo(el, 'rotationX', { duration: 0.6, ease: 'power3.out' })
+    const imgX = gsap.quickTo(img, 'x', { duration: 0.6, ease: 'power3.out' })
+    const imgY = gsap.quickTo(img, 'y', { duration: 0.6, ease: 'power3.out' })
+
     const move = (e: MouseEvent) => {
       const r = el.getBoundingClientRect()
       const px = (e.clientX - r.left) / r.width - 0.5
       const py = (e.clientY - r.top) / r.height - 0.5
-      gsap.to(el, { rotateY: px * 10, rotateX: -py * 8, z: 20, duration: 0.5, ease: 'power2.out' })
-      gsap.to(img, { x: px * -18, y: py * -14, duration: 0.5, ease: 'power2.out' })
+      rotY(px * 10); rotX(-py * 8)
+      imgX(px * -18); imgY(py * -14)
     }
-    const leave = () => {
-      gsap.to(el, { rotateY: 0, rotateX: 0, z: 0, duration: 0.7, ease: 'elastic.out(1,0.6)' })
-      gsap.to(img, { x: 0, y: 0, duration: 0.7, ease: 'power2.out' })
-    }
-    el.addEventListener('mousemove', move)
+    const leave = () => { rotY(0); rotX(0); imgX(0); imgY(0) }
+    el.addEventListener('mousemove', move, { passive: true })
     el.addEventListener('mouseleave', leave)
     return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave) }
   }, [])

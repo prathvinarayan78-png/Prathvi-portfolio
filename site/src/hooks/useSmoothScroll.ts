@@ -5,24 +5,30 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// exposed so ScrollToTop & anchors can drive the same instance
+export let lenis: Lenis | null = null
+
 export function useSmoothScroll(enabled: boolean) {
   useEffect(() => {
     if (!enabled) return
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    lenis = new Lenis({
+      duration: 1.35,
+      easing: (t) => 1 - Math.pow(1 - t, 4), // quart-out: glassy glide
       smoothWheel: true,
+      wheelMultiplier: 0.92,
+      touchMultiplier: 1.6,
+      lerp: 0.09,
     })
 
-    // the magic sync — Lenis drives ScrollTrigger via GSAP's ticker
     lenis.on('scroll', ScrollTrigger.update)
-    const raf = (time: number) => lenis.raf(time * 1000)
+    const raf = (time: number) => lenis!.raf(time * 1000)
     gsap.ticker.add(raf)
     gsap.ticker.lagSmoothing(0)
 
     return () => {
       gsap.ticker.remove(raf)
-      lenis.destroy()
+      lenis?.destroy()
+      lenis = null
     }
   }, [enabled])
 }

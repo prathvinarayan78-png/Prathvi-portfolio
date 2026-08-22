@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Environment } from '@react-three/drei'
+import { Environment, AdaptiveDpr } from '@react-three/drei'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing'
 import { HeroSculpture } from './HeroSculpture'
 import { FloatingObjects } from './FloatingObjects'
@@ -31,6 +31,7 @@ export function Scene() {
           <ParticleField count={isMobile ? 380 : 900} />
           <ScrollCamera />
           <Environment preset="city" />
+          <AdaptiveDpr pixelated />
 
           <EffectComposer>
             <Bloom luminanceThreshold={1} mipmapBlur intensity={1.5} radius={0.8} />

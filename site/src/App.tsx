@@ -10,12 +10,16 @@ import Home from './pages/Home'
 import WorksPage from './pages/WorksPage'
 import StudioPage from './pages/StudioPage'
 import ContactPage from './pages/ContactPage'
-import { useSmoothScroll } from './hooks/useSmoothScroll'
+import { useSmoothScroll, lenis } from './hooks/useSmoothScroll'
 import { useAppStore } from './stores/useAppStore'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  useEffect(() => {
+    // jump via Lenis so the smoother's internal state stays in sync
+    if (lenis) lenis.scrollTo(0, { immediate: true })
+    else window.scrollTo(0, 0)
+  }, [pathname])
   return null
 }
 

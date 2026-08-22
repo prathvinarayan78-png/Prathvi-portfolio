@@ -70,11 +70,28 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   transform: translateY(110%);
 }
 
-/* marquee */
+/* marquee — GPU composited */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 .animate-marquee {
   animation: marquee 24s linear infinite;
+  will-change: transform;
+}
+
+/* promote animated layers to the GPU */
+[data-line] > span,
+[data-hero-line],
+[data-card],
+[data-frame] {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* smoother font rendering during animation */
+.font-display { text-rendering: optimizeLegibility; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
 }
