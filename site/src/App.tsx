@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Scene } from './components/canvas/Scene'
 import { Preloader } from './components/ui/Preloader'
 import { CursorProvider } from './components/ui/CustomCursor'
+import { Spotlight } from './components/ui/Spotlight'
 import { Navigation } from './components/ui/Navigation'
 import { Footer } from './components/sections/Footer'
 import Home from './pages/Home'
@@ -47,6 +48,7 @@ export default function App() {
       <div className="grain">
         <Preloader />
         <CursorProvider />
+        <Spotlight />
         <Scene />
         <Navigation />
         <ScrollToTop />

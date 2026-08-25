@@ -86,6 +86,7 @@ void main(){
 
 export function HeroSculpture() {
   const mesh = useRef<THREE.Mesh>(null!)
+  const pulse = useRef(0)
   const uniforms = useMemo(
     () => ({ uTime: { value: 0 }, uStrength: { value: 0.35 } }),
     [],
@@ -93,16 +94,26 @@ export function HeroSculpture() {
 
   useFrame(({ clock, pointer }, delta) => {
     uniforms.uTime.value = clock.elapsedTime
+    // click-pulse decays back to rest
+    pulse.current = THREE.MathUtils.damp(pulse.current, 0, 2.2, delta)
+    uniforms.uStrength.value = 0.35 + pulse.current
     if (!mesh.current) return
-    // damped pointer-follow — no jitter, frame-rate independent
     const targetY = clock.elapsedTime * 0.12 + pointer.x * 0.3
     const targetX = Math.sin(clock.elapsedTime * 0.08) * 0.2 + pointer.y * 0.15
     mesh.current.rotation.y = THREE.MathUtils.damp(mesh.current.rotation.y, targetY, 2.5, delta)
     mesh.current.rotation.x = THREE.MathUtils.damp(mesh.current.rotation.x, targetX, 2.5, delta)
+    const s = 2.2 + pulse.current * 0.35
+    mesh.current.scale.setScalar(THREE.MathUtils.damp(mesh.current.scale.x, s, 4, delta))
   })
 
   return (
-    <mesh ref={mesh} position={[0, 0, 0]} scale={2.2}>
+    <mesh
+      ref={mesh}
+      position={[0, 0, 0]}
+      scale={2.2}
+      onClick={() => { pulse.current = Math.min(pulse.current + 0.55, 1.2) }}
+      onPointerOver={() => (document.body.style.cursor = 'none')}
+    >
       <icosahedronGeometry args={[1, 48]} />
       <shaderMaterial uniforms={uniforms} vertexShader={vertex} fragmentShader={fragment} />
     </mesh>

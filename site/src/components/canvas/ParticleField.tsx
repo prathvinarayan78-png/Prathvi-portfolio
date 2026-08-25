@@ -6,6 +6,7 @@ import * as THREE from 'three'
 
 const vertex = /* glsl */ `
 uniform float uTime;
+uniform vec2 uMouse;
 attribute float aScale;
 attribute float aPhase;
 varying float vAlpha;
@@ -14,6 +15,11 @@ void main(){
   vec3 pos = position;
   pos.y += sin(uTime * 0.3 + aPhase) * 0.6;
   pos.x += cos(uTime * 0.2 + aPhase * 2.0) * 0.4;
+
+  // cursor repulsion — particles shy away from the mouse ray
+  vec2 toMouse = pos.xy - uMouse * vec2(18.0, 10.0);
+  float d = length(toMouse);
+  pos.xy += normalize(toMouse + 0.0001) * smoothstep(6.0, 0.0, d) * 2.2;
 
   vec4 mv = modelViewMatrix * vec4(pos, 1.0);
   gl_Position = projectionMatrix * mv;
@@ -49,10 +55,14 @@ export function ParticleField({ count = 900 }: { count?: number }) {
     return { positions, scales, phases }
   }, [count])
 
-  const uniforms = useMemo(() => ({ uTime: { value: 0 } }), [])
+  const uniforms = useMemo(
+    () => ({ uTime: { value: 0 }, uMouse: { value: new THREE.Vector2(99, 99) } }),
+    [],
+  )
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, pointer }) => {
     uniforms.uTime.value = clock.elapsedTime
+    uniforms.uMouse.value.lerp(pointer as unknown as THREE.Vector2, 0.08)
   })
 
   return (

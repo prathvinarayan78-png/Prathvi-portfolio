@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCursorLabel } from './CustomCursor'
+import { Scramble } from './Scramble'
+import { Magnetic } from './Magnetic'
 
 const LINKS = [
   { to: '/works', label: 'WORKS' },
@@ -39,16 +41,18 @@ export function Navigation() {
                 `transition-opacity ${isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`
               }
             >
-              {l.label}
+              <Scramble text={l.label} />
             </NavLink>
           ))}
-          <NavLink
-            to="/contact"
-            {...cursor}
-            className="border border-white/40 px-4 py-2 hover:bg-white hover:text-black transition-colors"
-          >
-            START A PROJECT
-          </NavLink>
+          <Magnetic strength={0.25}>
+            <NavLink
+              to="/contact"
+              {...cursor}
+              className="inline-block border border-white/40 px-4 py-2 hover:bg-white hover:text-black transition-colors"
+            >
+              <Scramble text="START A PROJECT" />
+            </NavLink>
+          </Magnetic>
         </nav>
 
         {/* mobile burger */}

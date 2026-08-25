@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { TextReveal } from '../ui/TextReveal'
 import { useCursorLabel } from '../ui/CustomCursor'
+import { Magnetic } from '../ui/Magnetic'
 
 export function HomeCta() {
   const cursor = useCursorLabel('LET’S GO')
@@ -14,13 +15,17 @@ export function HomeCta() {
         className="font-display font-extrabold text-[clamp(2.4rem,8vw,7rem)] leading-[0.95] uppercase"
         lines={['Your project', <>starts <span className="text-[#4488ff]">here</span>.</>]}
       />
-      <Link
-        to="/contact"
-        {...cursor}
-        className="inline-block mt-12 border border-white/30 px-10 py-5 font-mono text-xs tracking-[0.35em] hover:bg-white hover:text-black transition-colors duration-300"
-      >
-        START A PROJECT ↗
-      </Link>
+      <div className="mt-12">
+        <Magnetic>
+          <Link
+            to="/contact"
+            {...cursor}
+            className="inline-block border border-white/30 px-10 py-5 font-mono text-xs tracking-[0.35em] hover:bg-white hover:text-black transition-colors duration-300"
+          >
+            START A PROJECT ↗
+          </Link>
+        </Magnetic>
+      </div>
     </section>
   )
 }

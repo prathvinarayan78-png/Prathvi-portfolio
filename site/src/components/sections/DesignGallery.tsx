@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { TextReveal } from '../ui/TextReveal'
 import { useCursorLabel } from '../ui/CustomCursor'
 import { DESIGN_WORK } from '../../data/work'
+import { TiltCard } from '../ui/TiltCard'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -58,11 +59,11 @@ export function DesignGallery() {
 
       <div className="grid md:grid-cols-12 gap-4 md:gap-6 auto-rows-auto">
         {DESIGN_WORK.map((p) => (
+          <TiltCard key={p.title} max={7} className={SPAN[p.span]}>
           <figure
-            key={p.title}
             data-piece
             {...cursor}
-            className={`group relative overflow-hidden border border-white/10 bg-[#101010] ${SPAN[p.span]}`}
+            className="group absolute inset-0 overflow-hidden border border-white/10 bg-[#101010]"
           >
             <img
               src={p.img}
@@ -77,6 +78,7 @@ export function DesignGallery() {
               </p>
             </figcaption>
           </figure>
+          </TiltCard>
         ))}
       </div>
     </section>
