@@ -7,6 +7,9 @@ interface AppState {
   setLoaded: (v: boolean) => void
   cursorLabel: string
   setCursorLabel: (l: string) => void
+  /* 0-1 page scroll progress — drives the 3D scene's mood */
+  scrollP: number
+  setScrollP: (p: number) => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -16,4 +19,6 @@ export const useAppStore = create<AppState>((set) => ({
   setLoaded: (loaded) => set({ loaded }),
   cursorLabel: '',
   setCursorLabel: (cursorLabel) => set({ cursorLabel }),
+  scrollP: 0,
+  setScrollP: (scrollP) => set({ scrollP }),
 }))

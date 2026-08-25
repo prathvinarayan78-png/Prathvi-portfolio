@@ -6,6 +6,7 @@ import { HeroSculpture } from './HeroSculpture'
 import { FloatingObjects } from './FloatingObjects'
 import { ParticleField } from './ParticleField'
 import { ScrollCamera } from './ScrollCamera'
+import { SceneMood } from './SceneMood'
 
 export function Scene() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
@@ -23,8 +24,7 @@ export function Scene() {
         <Suspense fallback={null}>
           <ambientLight intensity={0.25} />
           <directionalLight position={[4, 6, 4]} intensity={1.1} color="#dfe6ff" />
-          <pointLight position={[-6, -2, 2]} intensity={18} color="#4488ff" />
-          <pointLight position={[6, 3, -2]} intensity={10} color="#ffaa33" />
+          <SceneMood />
 
           <HeroSculpture />
           <FloatingObjects />
