@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 /* Word-by-word illumination as you scroll — the manifesto reads itself. */
 
 const TEXT =
-  'Most designers can’t automate. Most engineers can’t design. I live in the overlap — making work that looks sharp, cuts deep and runs itself.'
+  'Most designers can’t build. Most developers can’t design. Most editors do neither. I live in the overlap — work that looks sharp, moves right and cuts deep.'
 
 export function Manifesto() {
   const root = useRef<HTMLElement>(null)

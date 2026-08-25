@@ -35,7 +35,7 @@ export function Hero() {
   return (
     <section ref={root} id="top" className="relative z-10 min-h-[100svh] flex flex-col justify-end px-5 md:px-12 pb-12 md:pb-16 pointer-events-none">
       <p data-hero-meta className="font-mono text-[10px] md:text-[11px] tracking-[0.35em] text-white/50 mb-5 md:mb-6">
-        GRAPHIC DESIGN — EDIT — AGENTIC ENGINEERING
+        GRAPHIC DESIGN — WEBSITES — VIDEO EDITING
       </p>
 
       <h1 className="font-display font-extrabold text-giant text-white uppercase">

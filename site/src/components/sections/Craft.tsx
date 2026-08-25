@@ -17,17 +17,17 @@ const CRAFTS = [
   },
   {
     num: '02',
-    title: 'EDIT',
+    title: 'BUILD',
     accent: '#ffaa33',
-    copy: 'Cutting raw footage until only the pulse is left. Pacing is the invisible art — you feel it or you don’t.',
-    tags: ['VIDEO EDIT', 'MOTION', 'SOUND SYNC'],
+    copy: 'Websites that feel alive — 3D, motion and interaction engineered to make people stay.',
+    tags: ['WEBSITES', 'THREE.JS', 'INTERACTION'],
   },
   {
     num: '03',
-    title: 'AGENTS',
+    title: 'EDIT',
     accent: '#c0c0c0',
-    copy: 'AI agents that research, produce and ship while you sleep. The studio that never closes.',
-    tags: ['AI WORKFLOWS', 'AUTOMATION', 'PIPELINES'],
+    copy: 'Cutting raw footage until only the pulse is left. Pacing is the invisible art — you feel it or you don’t.',
+    tags: ['VIDEO EDIT', 'MOTION', 'SOUND SYNC'],
   },
 ]
 
