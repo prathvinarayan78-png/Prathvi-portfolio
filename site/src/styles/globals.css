@@ -5,9 +5,9 @@
    ========================================================== */
 
 :root {
-  --paper: #eaff00;   /* acid */
+  --paper: #ff4d00;   /* blaze orange */
   --ink: #0a0a0a;
-  --pop: #ff2f2f;
+  --pop: #00ffa3;
   --blue: #2f49ff;
 }
 
@@ -59,7 +59,7 @@ body.inv ::selection { background: var(--ink); color: var(--paper); }
 
 /* acid panel */
 .acid { background: var(--paper); color: var(--ink); }
-.pop { background: var(--pop); color: #fff; }
+.pop { background: var(--pop); color: var(--ink); }
 .blue { background: var(--blue); color: #fff; }
 
 /* marquee */

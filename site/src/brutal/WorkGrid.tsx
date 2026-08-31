@@ -1,4 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 import { DESIGN_WORK, WEB_WORK, EDIT_WORK } from '../data/work'
 
 /* THE WORK — one massive brutal table/grid. Rows expand on click,
@@ -31,12 +35,29 @@ const ROWS: Row[] = [
 
 export function WorkGrid() {
   const [open, setOpen] = useState<string | null>(null)
+  const root = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>('[data-row]', root.current!).forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { xPercent: i % 2 ? 14 : -14, opacity: 0 },
+          {
+            xPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 92%' },
+          },
+        )
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section id="work" className="px-4 md:px-8 py-16 md:py-24">
+    <section ref={root} id="work" className="px-4 md:px-8 py-16 md:py-24 overflow-hidden">
       <div className="flex items-end justify-between mb-8">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
-          THE<span className="text-[#ff2f2f]">*</span>WORK
+          THE<span className="text-[#00ffa3]">*</span>WORK
         </h2>
         <span className="font-bold text-xs md:text-sm">({ROWS.length}) PIECES</span>
       </div>
@@ -45,11 +66,11 @@ export function WorkGrid() {
         {ROWS.map((r) => {
           const isOpen = open === r.id
           return (
-            <div key={r.id} className="border-b-[3px] border-current">
+            <div key={r.id} data-row className="border-b-[3px] border-current will-change-transform">
               <button
                 data-noclick
                 onClick={() => setOpen(isOpen ? null : r.id)}
-                className="w-full grid grid-cols-[auto_1fr_auto] md:grid-cols-[80px_1fr_auto_auto] items-center gap-4 md:gap-8 py-4 md:py-5 text-left group hover:bg-[#eaff00] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
+                className="w-full grid grid-cols-[auto_1fr_auto] md:grid-cols-[80px_1fr_auto_auto] items-center gap-4 md:gap-8 py-4 md:py-5 text-left group hover:bg-[#ff4d00] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
               >
                 <span className="font-black text-lg md:text-2xl">{r.n}</span>
                 <span className="mega text-[clamp(1.3rem,4.2vw,3.4rem)] group-hover:translate-x-3 transition-transform duration-150">

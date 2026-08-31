@@ -20,7 +20,7 @@ export function Footer() {
       <div className="px-4 md:px-8 py-16 md:py-24 text-center">
         <p className="font-bold text-xs md:text-sm uppercase mb-6">Got a project? Prove it.</p>
         <h2 className="mega text-[clamp(3rem,12vw,12rem)]">
-          LET'S<span className="text-[#eaff00]">*</span>TALK
+          LET'S<span className="text-[#ff4d00]">*</span>TALK
         </h2>
 
         <button

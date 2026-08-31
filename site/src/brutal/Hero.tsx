@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 import { Sticker } from './Sticker'
 
 /* HERO — words slam in like stamps; every letter is hover-reactive;
@@ -33,7 +36,7 @@ function SlamLine({ text, delay, accent }: { text: string; delay: number; accent
     const t = e.target as HTMLElement
     if (!t.hasAttribute('data-c')) return
     gsap.to(t, {
-      y: -14, scale: 1.12, rotation: (Math.random() - 0.5) * 16, color: '#eaff00',
+      y: -14, scale: 1.12, rotation: (Math.random() - 0.5) * 16, color: '#ff4d00',
       duration: 0.14,
       onComplete: () => gsap.to(t, { y: 0, scale: 1, rotation: 0, color: 'inherit', duration: 0.4, ease: 'bounce.out' }),
     })
@@ -52,6 +55,20 @@ function SlamLine({ text, delay, accent }: { text: string; delay: number; accent
 
 export function Hero() {
   const [time, setTime] = useState('')
+  const root = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>('.mega', root.current!).forEach((el, i) => {
+        gsap.to(el, {
+          yPercent: -(14 + i * 10),
+          ease: 'none',
+          scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: 0.6 },
+        })
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
 
   useEffect(() => {
     const f = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Kolkata' })
@@ -67,7 +84,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-6 overflow-hidden">
+    <section ref={root} className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-6 overflow-hidden">
       {/* corner meta */}
       <div className="flex justify-between font-bold text-[11px] md:text-xs uppercase">
         <span>Portfolio v3.0 — RAW</span>
@@ -76,7 +93,7 @@ export function Hero() {
 
       <div className="relative">
         <SlamLine text={LINES[0]} delay={0.2} />
-        <SlamLine text={LINES[1]} delay={0.65} accent="text-[#eaff00]" />
+        <SlamLine text={LINES[1]} delay={0.65} accent="text-[#ff4d00]" />
         <div className="flex flex-wrap items-end gap-x-8">
           <SlamLine text={LINES[2]} delay={1.15} />
           <SlamLine text={LINES[3]} delay={1.5} />

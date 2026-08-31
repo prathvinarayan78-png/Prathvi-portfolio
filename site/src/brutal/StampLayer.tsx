@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
    The page becomes the visitor's canvas. */
 
 const WORDS = ['NICE.', 'BRUTAL', 'WOW', 'CLICK', 'MORE', 'YES!!', 'LOUD', 'RAW*', 'OK???', 'SHIP IT']
-const COLORS = ['#eaff00', '#ff2f2f', '#2f49ff', '#ffffff']
+const COLORS = ['#ff4d00', '#00ffa3', '#2f49ff', '#ffffff']
 
 interface Stamp { id: number; x: number; y: number; word: string; color: string; rot: number }
 
