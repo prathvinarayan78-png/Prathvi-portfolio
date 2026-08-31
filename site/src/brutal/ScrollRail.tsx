@@ -31,8 +31,12 @@ export function ScrollRail() {
   }, [])
 
   return (
-    <section ref={root} className="overflow-hidden border-y-[3px] border-current">
+    <section ref={root} className="overflow-hidden border-y-[3px] border-current h-[100svh] flex flex-col justify-center relative">
+      <p className="absolute top-5 left-4 md:left-8 font-bold text-[10px] md:text-xs uppercase opacity-60">
+        the loop
+      </p>
       <div ref={rail} className="flex items-center gap-10 md:gap-16 py-10 md:py-16 px-8 w-max will-change-transform">
+
         {WORDS.map((w, i) =>
           w === '★' ? (
             <span key={i} className="mega text-[clamp(2rem,6vw,5rem)] text-[#ff4d00]">★</span>
@@ -51,6 +55,9 @@ export function ScrollRail() {
           ),
         )}
       </div>
+      <p className="absolute bottom-5 right-4 md:right-8 font-bold text-[10px] md:text-xs uppercase opacity-60">
+        scroll drives it →
+      </p>
     </section>
   )
 }
