@@ -14,10 +14,10 @@ export function Footer() {
   }
 
   return (
-    <footer id="contact" className="pt-8">
+    <footer id="contact" className="pt-20 md:pt-32">
       <Marquee items={['HIRE ME', 'OR REGRET IT', 'HELLO@PRATHVI.DESIGN', 'DELHI IN']} speed={14} />
 
-      <div className="px-4 md:px-8 py-16 md:py-24 text-center">
+      <div className="px-4 md:px-8 py-28 md:py-44 text-center">
         <p className="font-bold text-xs md:text-sm uppercase mb-6">Got a project? Prove it.</p>
         <h2 className="mega text-[clamp(3rem,12vw,12rem)]">
           LET'S<span className="text-[#ff4d00]">*</span>TALK

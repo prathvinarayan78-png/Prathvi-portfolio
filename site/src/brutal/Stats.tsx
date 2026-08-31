@@ -43,7 +43,7 @@ export function Stats() {
   }, [])
 
   return (
-    <section ref={root} className="relative overflow-hidden border-y-[3px] border-current py-16 md:py-28">
+    <section ref={root} className="relative overflow-hidden border-y-[3px] border-current py-28 md:py-44">
       <span
         data-drift
         aria-hidden

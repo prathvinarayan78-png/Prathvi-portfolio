@@ -83,7 +83,7 @@ export function Meanwhile() {
   }, [])
 
   return (
-    <section ref={root} className="relative overflow-hidden border-t-[3px] border-current py-20 md:py-32">
+    <section ref={root} className="relative overflow-hidden border-t-[3px] border-current py-28 md:py-44">
       <span
         data-ghost
         aria-hidden

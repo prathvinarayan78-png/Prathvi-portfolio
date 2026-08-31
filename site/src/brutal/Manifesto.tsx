@@ -30,7 +30,7 @@ export function Manifesto() {
   }, [])
 
   return (
-    <section ref={root} className="acid border-y-[3px] border-[#0a0a0a] px-4 md:px-8 py-16 md:py-24">
+    <section ref={root} className="acid border-y-[3px] border-[#0a0a0a] px-4 md:px-8 py-28 md:py-44">
       <p className="mega text-[clamp(1.6rem,5vw,4.4rem)] max-w-6xl leading-[1.02]">
         {WORDS.map((w, i) => (
           <span key={i} data-w className="inline-block mr-[0.3em] will-change-transform">
