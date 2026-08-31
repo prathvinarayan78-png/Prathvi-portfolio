@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Loader } from './brutal/Loader'
 import { Nav } from './brutal/Nav'
 import { Hero } from './brutal/Hero'
 import { Marquee } from './brutal/Marquee'
@@ -26,15 +28,18 @@ import { Orbit } from './brutal/Orbit'
    Click anywhere to stamp. ☀ bottom-left for day mode. */
 
 export default function App() {
+  const [ready, setReady] = useState(false)
+
   return (
     <div id="top" className="noise relative">
+      <Loader onDone={() => setReady(true)} />
       <StampLayer />
       <Progress />
       <SideNav />
       <DayToggle />
       <Nav />
 
-      <Hero />
+      <Hero ready={ready} />
       <Marquee items={['GRAPHIC DESIGN', 'WEB BUILDS', 'VIDEO EDITS', 'NO TEMPLATES', 'ALL KILLER']} />
       <WorkGrid />
       <ScrollRail />

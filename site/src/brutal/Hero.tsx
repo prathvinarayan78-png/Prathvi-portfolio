@@ -11,10 +11,11 @@ import { toggleDay } from './theme'
 
 const LINES = ['GRAPHIC', 'DESIGNER', '+WEB', '+EDITOR']
 
-function SlamLine({ text, delay, accent }: { text: string; delay: number; accent?: string }) {
+function SlamLine({ text, delay, accent, go }: { text: string; delay: number; accent?: string; go: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!go) return
     const chars = ref.current!.querySelectorAll('[data-c]')
     gsap.fromTo(
       chars,
@@ -31,7 +32,7 @@ function SlamLine({ text, delay, accent }: { text: string; delay: number; accent
         },
       },
     )
-  }, [delay])
+  }, [delay, go])
 
   const hover = (e: React.MouseEvent) => {
     const t = e.target as HTMLElement
@@ -44,7 +45,7 @@ function SlamLine({ text, delay, accent }: { text: string; delay: number; accent
   }
 
   return (
-    <div ref={ref} className={`mega text-[clamp(3.4rem,13.5vw,15rem)] ${accent ?? ''}`} onMouseOver={hover}>
+    <div ref={ref} className={`mega text-[clamp(3.4rem,13.5vw,15rem)] ${accent ?? ''}`} style={{ opacity: go ? undefined : 0 }} onMouseOver={hover}>
       {text.split('').map((c, i) => (
         <span key={i} data-c className="inline-block will-change-transform cursor-default">
           {c}
@@ -54,7 +55,7 @@ function SlamLine({ text, delay, accent }: { text: string; delay: number; accent
   )
 }
 
-export function Hero() {
+export function Hero({ ready = true }: { ready?: boolean }) {
   const [time, setTime] = useState('')
   const root = useRef<HTMLElement>(null)
 
@@ -90,11 +91,11 @@ export function Hero() {
       </div>
 
       <div className="relative">
-        <SlamLine text={LINES[0]} delay={0.2} />
-        <SlamLine text={LINES[1]} delay={0.65} accent="text-[#ff4d00]" />
+        <SlamLine text={LINES[0]} delay={0.2} go={ready} />
+        <SlamLine text={LINES[1]} delay={0.65} accent="text-[#ff4d00]" go={ready} />
         <div className="flex flex-wrap items-end gap-x-8">
-          <SlamLine text={LINES[2]} delay={1.15} />
-          <SlamLine text={LINES[3]} delay={1.5} />
+          <SlamLine text={LINES[2]} delay={1.15} go={ready} />
+          <SlamLine text={LINES[3]} delay={1.5} go={ready} />
         </div>
 
         {/* draggable stickers */}
