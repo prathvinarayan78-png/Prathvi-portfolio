@@ -92,6 +92,13 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 }
 .jitter:hover { animation: jitter 0.25s linear infinite; }
 
+/* terminal caret */
+.caret::after {
+  content: "█";
+  animation: blink 0.7s steps(1) infinite;
+  margin-left: 2px;
+}
+
 /* blink */
 @keyframes blink { 50% { opacity: 0; } }
 .blink { animation: blink 1s steps(1) infinite; }
