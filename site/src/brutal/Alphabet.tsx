@@ -50,6 +50,11 @@ export function Alphabet() {
           <div
             key={l}
             data-az
+            onTouchStart={(e) => {
+              const el = e.currentTarget
+              el.classList.add('tapped')
+              setTimeout(() => el.classList.remove('tapped'), 1200)
+            }}
             className="group relative aspect-square border-[3px] border-current flex items-center justify-center overflow-hidden cursor-crosshair will-change-transform"
           >
             <span className="mega text-[clamp(1.6rem,4.5vw,3.4rem)] group-hover:opacity-0 transition-opacity duration-100">

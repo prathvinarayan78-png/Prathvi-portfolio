@@ -28,7 +28,7 @@ export function Meanwhile() {
           trigger: root.current,
           pin: true,
           scrub: 0.5,
-          end: () => `+=${innerHeight * 1.6}`,
+          end: () => `+=${innerHeight * (innerWidth < 768 ? 1.0 : 1.6)}`,
         },
       })
       rows.forEach((row, i) => {

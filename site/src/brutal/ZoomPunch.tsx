@@ -24,7 +24,7 @@ export function ZoomPunch() {
             trigger: root.current,
             pin: true,
             scrub: 0.5,
-            end: () => `+=${innerHeight * 1.8}`,
+            end: () => `+=${innerHeight * (innerWidth < 768 ? 1.1 : 1.8)}`,
           },
         },
       )

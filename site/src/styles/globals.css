@@ -145,3 +145,52 @@ body.inv ::-webkit-scrollbar-thumb { background: var(--ink); border-color: var(-
 @media (prefers-reduced-motion: reduce) {
   .marq, .jitter:hover, .blink { animation: none !important; }
 }
+
+/* ==========================================================
+   MOBILE / TOUCH — same brutality, tuned for small screens
+   ========================================================== */
+
+/* dynamic viewport (mobile URL bars) */
+@supports (height: 100dvh) {
+  .min-h-\[100svh\] { min-height: 100dvh; }
+}
+
+/* notches / home indicators */
+@supports (padding: env(safe-area-inset-left)) {
+  body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
+
+/* touch devices: tap = hover for the invert cells & A-Z wall */
+@media (pointer: coarse) {
+  .cell:active { background: var(--paper); color: var(--ink); }
+  body.day .cell:active { background: var(--ink); color: #ffffff; }
+
+  /* .tapped class is toggled by JS for A-Z flips + work rows */
+  [data-az].tapped span:first-child { opacity: 0; }
+  [data-az].tapped span:last-child { opacity: 1 !important; }
+
+  /* slabs: lighter shadows, no hover lift (avoids sticky-hover) */
+  .slab { box-shadow: 4px 4px 0 0 currentColor; }
+  .slab:hover { transform: none; box-shadow: 4px 4px 0 0 currentColor; }
+  .slab:active { transform: translate(3px, 3px); box-shadow: 0 0 0 0 currentColor; }
+
+  /* jitter is pointless without hover */
+  .jitter:hover { animation: none; }
+
+  /* default-visible captions/labels that desktop reveals on hover */
+  .img-brut { filter: grayscale(0.35) contrast(1.08); }
+}
+
+/* small screens: chunky borders get slimmer, stamps smaller */
+@media (max-width: 640px) {
+  .slab { border-width: 2.5px; }
+  .cell { border-width: 2.5px; }
+  .stamp { font-size: 10px; padding: 3px 7px; border-width: 2px; }
+  /* native scrollbar on mobile (custom one wastes width) */
+  ::-webkit-scrollbar { width: 0; }
+}
+
+/* keep GPU work low on small screens */
+@media (max-width: 640px) {
+  .noise::after { opacity: 0.04; }
+}

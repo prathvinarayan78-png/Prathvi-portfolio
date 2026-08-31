@@ -40,8 +40,13 @@ function Eyes() {
         el.style.transform = `translate(${Math.cos(a) * 10}px, ${Math.sin(a) * 10}px)`
       })
     }
+    const touch = (e: TouchEvent) => {
+      const t = e.touches[0]
+      if (t) move({ clientX: t.clientX, clientY: t.clientY } as MouseEvent)
+    }
     addEventListener('mousemove', move, { passive: true })
-    return () => removeEventListener('mousemove', move)
+    addEventListener('touchmove', touch, { passive: true })
+    return () => { removeEventListener('mousemove', move); removeEventListener('touchmove', touch) }
   }, [])
   return (
     <div className="h-full flex items-center justify-center gap-4">

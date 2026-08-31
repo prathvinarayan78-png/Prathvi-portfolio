@@ -25,7 +25,7 @@ export function Process() {
           trigger: root.current,
           pin: true,
           scrub: 0.7,
-          end: () => `+=${innerHeight * 2.2}`,
+          end: () => `+=${innerHeight * (innerWidth < 768 ? 1.4 : 2.2)}`,
         },
       })
       cards.forEach((c, i) => {
