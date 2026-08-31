@@ -113,8 +113,8 @@ export function Process() {
               <div
                 key={s.n}
                 data-step
-                className={`relative w-[calc(100%-1.75rem)] ml-7 md:ml-0 md:w-[calc(50%-3rem)] min-w-0 will-change-transform ${
-                  left ? '' : 'md:ml-auto'
+                className={`relative w-[calc(100%-1.75rem)] ml-7 md:w-[calc(50%-3rem)] min-w-0 will-change-transform ${
+                  left ? 'md:ml-0' : 'md:ml-auto'
                 }`}
               >
                 {/* connector nub to the spine */}
@@ -129,8 +129,7 @@ export function Process() {
                   <div className="flex items-start justify-between gap-4">
                     <span
                       data-badge
-                      className="inline-grid place-items-center w-10 h-10 md:w-16 md:h-16 border-[3px] border-current font-black text-base md:text-2xl bg-page text-current will-change-transform shrink-0"
-                      style={{ color: 'inherit' }}
+                      className="inline-grid place-items-center w-10 h-10 md:w-16 md:h-16 border-[3px] border-current font-black text-base md:text-2xl bg-[#0a0a0a] text-white will-change-transform shrink-0"
                     >
                       {s.n}
                     </span>
