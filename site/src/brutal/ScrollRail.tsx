@@ -4,59 +4,77 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* Pinned rail — a giant sentence scrubs horizontally as you scroll,
-   with alternating filled/outlined words. */
+/* THE LOOP — rebuilt from scratch. NO pinning (pins caused the
+   blackout). Three full-width rails slide in opposite directions,
+   scrubbed by the section's natural pass through the viewport.
+   The page never stops scrolling, so there is never dead space. */
 
-const WORDS = ['DESIGN', '★', 'BUILD', '★', 'EDIT', '★', 'REPEAT', '★', 'LOUDER', '★']
+const ROWS: { words: string[]; dir: 1 | -1; stroke?: boolean }[] = [
+  { words: ['DESIGN', 'DESIGN', 'DESIGN', 'DESIGN'], dir: -1 },
+  { words: ['BUILD', 'BUILD', 'BUILD', 'BUILD'], dir: 1, stroke: true },
+  { words: ['EDIT', 'EDIT', 'EDIT', 'EDIT'], dir: -1 },
+]
 
 export function ScrollRail() {
   const root = useRef<HTMLElement>(null)
-  const rail = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const w = rail.current!.scrollWidth - innerWidth
-      gsap.to(rail.current, {
-        x: -w,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: root.current,
-          pin: true,
-          scrub: 0.6,
-          end: () => `+=${w}`,
-        },
+      gsap.utils.toArray<HTMLElement>('[data-rail]', root.current!).forEach((rail) => {
+        const dir = Number(rail.dataset.dir)
+        // start shifted one way, scrub to the other as the section crosses the screen
+        gsap.fromTo(
+          rail,
+          { xPercent: dir * 12 },
+          {
+            xPercent: dir * -12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: root.current,
+              start: 'top bottom',   // begins the moment it peeks in
+              end: 'bottom top',     // done when it leaves — never pinned
+              scrub: 0.4,
+            },
+          },
+        )
       })
     }, root)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={root} className="overflow-hidden border-y-[3px] border-current h-[100svh] flex flex-col justify-center relative">
-      <p className="absolute top-5 left-4 md:left-8 font-bold text-[10px] md:text-xs uppercase opacity-60">
-        the loop
+    <section ref={root} className="relative overflow-hidden border-y-[3px] border-current py-6 md:py-10">
+      <p className="px-4 md:px-8 mb-4 font-bold text-[10px] md:text-xs uppercase opacity-60">
+        the loop — scroll moves the lines
       </p>
-      <div ref={rail} className="flex items-center gap-10 md:gap-16 py-10 md:py-16 px-8 w-max will-change-transform">
 
-        {WORDS.map((w, i) =>
-          w === '★' ? (
-            <span key={i} className="mega text-[clamp(2rem,6vw,5rem)] text-[#ff4d00]">★</span>
-          ) : (
-            <span
-              key={i}
-              className="mega text-[clamp(4rem,16vw,15rem)] whitespace-nowrap"
-              style={
-                i % 4 === 2
-                  ? { WebkitTextStroke: '2.5px currentColor', color: 'transparent' }
-                  : undefined
-              }
-            >
-              {w}
+      {ROWS.map((row, ri) => (
+        <div
+          key={ri}
+          data-rail
+          data-dir={row.dir}
+          className="flex items-center gap-8 md:gap-14 whitespace-nowrap will-change-transform justify-center"
+        >
+          {row.words.map((w, wi) => (
+            <span key={wi} className="flex items-center gap-8 md:gap-14">
+              <span
+                className="mega text-[clamp(3rem,11vw,10rem)] leading-[0.95]"
+                style={
+                  row.stroke
+                    ? { WebkitTextStroke: '2.5px currentColor', color: 'transparent' }
+                    : undefined
+                }
+              >
+                {w}
+              </span>
+              <span className="mega text-[clamp(1.4rem,4vw,3.4rem)] text-[#ff4d00]">★</span>
             </span>
-          ),
-        )}
-      </div>
-      <p className="absolute bottom-5 right-4 md:right-8 font-bold text-[10px] md:text-xs uppercase opacity-60">
-        scroll drives it →
+          ))}
+        </div>
+      ))}
+
+      <p className="px-4 md:px-8 mt-4 font-bold text-[10px] md:text-xs uppercase opacity-60 text-right">
+        repeat until loud →
       </p>
     </section>
   )
