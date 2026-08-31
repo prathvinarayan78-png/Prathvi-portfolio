@@ -60,7 +60,7 @@ export function Process() {
         gsap.fromTo(
           el,
           {
-            xPercent: fromLeft ? -60 : 60,
+            xPercent: fromLeft ? (innerWidth < 768 ? -22 : -60) : (innerWidth < 768 ? 22 : 60),
             rotation: fromLeft ? -7 : 7,
             opacity: 0,
           },
@@ -100,10 +100,10 @@ export function Process() {
 
       <div className="relative max-w-5xl mx-auto">
         {/* center spine — draws downward with scroll */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[6px] -translate-x-1/2 bg-current opacity-10" />
+        <div className="absolute left-3 md:left-1/2 top-0 bottom-0 w-[5px] md:w-[6px] -translate-x-1/2 bg-current opacity-10" />
         <div
           ref={spine}
-          className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[6px] -translate-x-1/2 bg-[#ff4d00] origin-top will-change-transform"
+          className="absolute left-3 md:left-1/2 top-0 bottom-0 w-[5px] md:w-[6px] -translate-x-1/2 bg-[#ff4d00] origin-top will-change-transform"
         />
 
         <div className="space-y-12 md:space-y-20">
@@ -113,7 +113,7 @@ export function Process() {
               <div
                 key={s.n}
                 data-step
-                className={`relative w-[calc(100%-3.5rem)] ml-14 md:ml-0 md:w-[calc(50%-3rem)] will-change-transform ${
+                className={`relative w-[calc(100%-1.75rem)] ml-7 md:ml-0 md:w-[calc(50%-3rem)] min-w-0 will-change-transform ${
                   left ? '' : 'md:ml-auto'
                 }`}
               >
@@ -123,23 +123,23 @@ export function Process() {
                     left ? '-right-12' : '-left-12'
                   }`}
                 />
-                <span className="md:hidden absolute top-10 -left-8 h-[6px] w-8 bg-[#ff4d00]" />
+                <span className="md:hidden absolute top-10 -left-4 h-[5px] w-4 bg-[#ff4d00]" />
 
-                <div className={`slab ${s.c} p-5 md:p-7`} data-noclick>
+                <div className={`slab ${s.c} p-4 md:p-7 overflow-hidden`} data-noclick>
                   <div className="flex items-start justify-between gap-4">
                     <span
                       data-badge
-                      className="inline-grid place-items-center w-12 h-12 md:w-16 md:h-16 border-[3px] border-current font-black text-lg md:text-2xl bg-page text-current will-change-transform"
+                      className="inline-grid place-items-center w-10 h-10 md:w-16 md:h-16 border-[3px] border-current font-black text-base md:text-2xl bg-page text-current will-change-transform shrink-0"
                       style={{ color: 'inherit' }}
                     >
                       {s.n}
                     </span>
-                    <span className="font-bold text-[9px] md:text-[11px] uppercase border-[2.5px] border-current px-2 py-1">
+                    <span className="font-bold text-[8px] md:text-[11px] uppercase border-[2px] md:border-[2.5px] border-current px-1.5 py-1 text-right shrink min-w-0">
                       {s.chip}
                     </span>
                   </div>
-                  <p className="mega text-[clamp(1.8rem,4.6vw,3.4rem)] mt-4">{s.t}</p>
-                  <p className="font-bold text-[11px] md:text-sm uppercase mt-2 leading-relaxed">
+                  <p className="mega text-[clamp(1.3rem,6.5vw,3.4rem)] mt-4 break-words">{s.t}</p>
+                  <p className="font-bold text-[10px] md:text-sm uppercase mt-2 leading-relaxed break-words">
                     {s.d}
                   </p>
                 </div>
