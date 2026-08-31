@@ -63,7 +63,7 @@ export function Meanwhile() {
       </span>
 
       <div className="relative w-full px-4 md:px-8">
-        <div ref={term} className="slab max-w-2xl mx-auto p-5 md:p-8 bg-inherit" data-noclick>
+        <div ref={term} className="slab max-w-2xl mx-auto p-5 md:p-8 bg-page" data-noclick>
           <div className="flex gap-2 mb-4">
             <span className="w-3.5 h-3.5 rounded-full pop border-[2.5px] border-current" />
             <span className="w-3.5 h-3.5 rounded-full acid border-[2.5px] border-current" />

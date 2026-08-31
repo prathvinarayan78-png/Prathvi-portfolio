@@ -25,7 +25,7 @@ export function DayToggle() {
       data-noclick
       onClick={flip}
       aria-label={day ? 'Switch to night mode' : 'Switch to day mode'}
-      className="fixed bottom-3 left-3 z-[60] slab bg-inherit font-black text-lg md:text-xl w-12 h-12 md:w-14 md:h-14 grid place-items-center"
+      className="fixed bottom-3 left-3 z-[60] slab bg-page font-black text-lg md:text-xl w-12 h-12 md:w-14 md:h-14 grid place-items-center"
       title={day ? 'NIGHT MODE' : 'DAY MODE'}
     >
       {day ? '☾' : '☀'}

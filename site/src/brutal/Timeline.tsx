@@ -73,7 +73,7 @@ export function Timeline() {
                   i % 2 ? 'md:-left-[2.6rem]' : 'md:-right-[3.2rem] md:left-auto md:translate-x-1/2'
                 }`}
               />
-              <div className="slab p-4 md:p-5 bg-inherit" data-noclick>
+              <div className="slab p-4 md:p-5 bg-page" data-noclick>
                 <span className="font-black text-[10px] md:text-xs text-[#ff4d00]">{e.y}</span>
                 <p className="mega text-[clamp(1.1rem,2.6vw,1.9rem)] mt-1">{e.t}</p>
                 <p className="font-bold text-[10px] md:text-xs uppercase mt-2 opacity-70 leading-relaxed">{e.d}</p>

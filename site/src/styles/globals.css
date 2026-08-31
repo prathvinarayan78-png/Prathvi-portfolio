@@ -16,7 +16,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--ink);
+  --bg: var(--ink);
+  background: var(--bg);
   color: #fff;
   font-family: "Space Mono", monospace;
   overflow-x: hidden;
@@ -25,19 +26,22 @@ body {
 
 /* inverted mode — the big switch flips the whole site */
 body.inv {
-  background: var(--paper);
+  --bg: var(--paper);
   color: var(--ink);
 }
 
 /* DAY MODE — bone white paper, ink text, same brutality */
 body.day {
-  background: #ffffff;
+  --bg: #ffffff;
   color: var(--ink);
 }
 body.day.inv {
-  background: var(--ink);
+  --bg: var(--ink);
   color: #ffffff;
 }
+
+/* solid page-colored surfaces (nav, cards, chips) — follows every mode */
+.bg-page { background-color: var(--bg); }
 body.day .cell:hover { background: var(--ink); color: #ffffff; }
 body.day.inv .cell:hover { background: #ffffff; color: var(--ink); }
 body.day ::selection { background: var(--ink); color: #ffffff; }

@@ -24,7 +24,7 @@ export function Progress() {
       <div className="fixed top-0 left-0 right-0 z-[60] h-[6px] pointer-events-none">
         <div ref={bar} className="h-full bg-[#ff4d00] origin-left will-change-transform" style={{ transform: 'scaleX(0)' }} />
       </div>
-      <span className="fixed bottom-3 right-3 z-[60] font-black text-[11px] md:text-sm tabular-nums border-[3px] border-current px-2 py-1 bg-inherit pointer-events-none">
+      <span className="fixed bottom-3 right-3 z-[60] font-black text-[11px] md:text-sm tabular-nums border-[3px] border-current px-2 py-1 bg-page pointer-events-none">
         {String(pct).padStart(3, '0')}%
       </span>
     </>

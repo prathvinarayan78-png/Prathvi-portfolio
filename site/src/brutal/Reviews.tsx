@@ -50,7 +50,7 @@ export function Reviews() {
             key={r.who}
             data-rev
             data-rot={r.rot}
-            className="slab p-5 md:p-6 will-change-transform bg-inherit"
+            className="slab p-5 md:p-6 will-change-transform bg-page"
             style={{ rotate: `${r.rot}deg` }}
           >
             {/* tape */}

@@ -51,7 +51,7 @@ export function Orbit() {
           return (
             <span
               key={t}
-              className="absolute left-1/2 top-1/2 slab bg-inherit font-black text-xs md:text-lg px-3 md:px-5 py-1.5 md:py-2.5"
+              className="absolute left-1/2 top-1/2 slab bg-page font-black text-xs md:text-lg px-3 md:px-5 py-1.5 md:py-2.5"
               style={{
                 transform: `rotate(${a}deg) translateY(-${R}vmin) rotate(${-a}deg) translate(-50%,-50%)`,
               }}
