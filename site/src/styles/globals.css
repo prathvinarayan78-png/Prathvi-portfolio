@@ -29,6 +29,22 @@ body.inv {
   color: var(--ink);
 }
 
+/* DAY MODE — bone white paper, ink text, same brutality */
+body.day {
+  background: #f2efe6;
+  color: var(--ink);
+}
+body.day.inv {
+  background: var(--ink);
+  color: #f2efe6;
+}
+body.day .cell:hover { background: var(--ink); color: #f2efe6; }
+body.day.inv .cell:hover { background: #f2efe6; color: var(--ink); }
+body.day ::selection { background: var(--ink); color: #f2efe6; }
+body.day ::-webkit-scrollbar-track { background: #f2efe6; border-left-color: var(--ink); }
+body.day ::-webkit-scrollbar-thumb { background: var(--ink); border-color: #f2efe6; }
+body.day .noise::after { opacity: 0.045; }
+
 ::selection { background: var(--paper); color: var(--ink); }
 body.inv ::selection { background: var(--ink); color: var(--paper); }
 
