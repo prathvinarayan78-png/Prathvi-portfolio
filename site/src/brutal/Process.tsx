@@ -88,8 +88,8 @@ export function Process() {
   }, [])
 
   return (
-    <section ref={root} className="relative px-4 md:px-8 py-16 md:py-24 overflow-hidden">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+    <section ref={root} className="relative px-4 md:px-8 pt-28 md:pt-44 pb-28 md:pb-44 overflow-hidden">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           HOW<span className="text-[#00ffa3]">*</span>I*WORK
         </h2>
@@ -148,7 +148,7 @@ export function Process() {
         </div>
 
         {/* end cap */}
-        <div className="relative mt-12 md:mt-16 text-center">
+        <div className="relative mt-16 md:mt-24 text-center">
           <span className="inline-block slab pop font-black uppercase text-sm md:text-lg px-6 py-3 rotate-[-1.5deg]" data-noclick>
             RESULT: WORK THAT SLAPS ✓
           </span>
