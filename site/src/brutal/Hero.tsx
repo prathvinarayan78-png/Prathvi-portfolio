@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 import { Sticker } from './Sticker'
+import { toggleDay } from './theme'
 
 /* HERO — words slam in like stamps; every letter is hover-reactive;
    giant invert switch; draggable stickers scattered around. */
@@ -78,12 +79,7 @@ export function Hero() {
     return () => clearInterval(id)
   }, [])
 
-  const invert = () => {
-    const next = !document.body.classList.contains('day')
-    document.body.classList.toggle('day', next)
-    localStorage.setItem('prathvi-day', next ? '1' : '0')
-    gsap.fromTo('body', { rotate: 0.6 }, { rotate: 0, duration: 0.4, ease: 'elastic.out(1,0.3)' })
-  }
+  const invert = () => toggleDay()
 
   return (
     <section ref={root} className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-6 overflow-hidden">
