@@ -79,7 +79,9 @@ export function Hero() {
   }, [])
 
   const invert = () => {
-    document.body.classList.toggle('inv')
+    const next = !document.body.classList.contains('day')
+    document.body.classList.toggle('day', next)
+    localStorage.setItem('prathvi-day', next ? '1' : '0')
     gsap.fromTo('body', { rotate: 0.6 }, { rotate: 0, duration: 0.4, ease: 'elastic.out(1,0.3)' })
   }
 

@@ -24,9 +24,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* inverted mode — the big switch flips the whole site */
+/* light mode — clean white, ink text. (both toggles use this) */
 body.inv {
-  --bg: var(--paper);
+  --bg: #ffffff;
   color: var(--ink);
 }
 
@@ -35,22 +35,18 @@ body.day {
   --bg: #ffffff;
   color: var(--ink);
 }
-body.day.inv {
-  --bg: var(--ink);
-  color: #ffffff;
-}
 
 /* solid page-colored surfaces (nav, cards, chips) — follows every mode */
 .bg-page { background-color: var(--bg); }
-body.day .cell:hover { background: var(--ink); color: #ffffff; }
-body.day.inv .cell:hover { background: #ffffff; color: var(--ink); }
-body.day ::selection { background: var(--ink); color: #ffffff; }
-body.day ::-webkit-scrollbar-track { background: #ffffff; border-left-color: var(--ink); }
-body.day ::-webkit-scrollbar-thumb { background: var(--ink); border-color: #ffffff; }
-body.day .noise::after { opacity: 0.045; }
+body.day .cell:hover, body.inv .cell:hover { background: var(--ink); color: #ffffff; }
+
+body.day ::selection, body.inv ::selection { background: var(--ink); color: #ffffff; }
+body.day ::-webkit-scrollbar-track, body.inv ::-webkit-scrollbar-track { background: #ffffff; border-left-color: var(--ink); }
+body.day ::-webkit-scrollbar-thumb, body.inv ::-webkit-scrollbar-thumb { background: var(--ink); border-color: #ffffff; }
+body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 
 ::selection { background: var(--paper); color: var(--ink); }
-body.inv ::selection { background: var(--ink); color: var(--paper); }
+
 
 .font-black { font-family: "Archivo Black", sans-serif; }
 

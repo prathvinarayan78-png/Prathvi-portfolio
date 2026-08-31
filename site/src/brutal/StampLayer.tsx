@@ -17,7 +17,7 @@ export function StampLayer() {
       const t = e.target as HTMLElement
       // only on non-interactive surfaces
       if (t.closest('a,button,input,textarea,[data-noclick]')) return
-      const day = document.body.classList.contains('day') && !document.body.classList.contains('inv')
+      const day = document.body.classList.contains('day')
       const palette = day ? COLORS.map((c) => (c === '#ffffff' ? '#0a0a0a' : c)) : COLORS
       const stamp: Stamp = {
         id: id++,
