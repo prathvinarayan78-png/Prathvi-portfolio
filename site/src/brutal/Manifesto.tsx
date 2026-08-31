@@ -31,9 +31,9 @@ export function Manifesto() {
 
   return (
     <section ref={root} className="acid border-y-[3px] border-[#0a0a0a] px-4 md:px-8 py-28 md:py-44">
-      <p className="mega text-[clamp(1.6rem,5vw,4.4rem)] max-w-6xl leading-[1.02]">
+      <p className="mega text-[clamp(1.6rem,5vw,4.4rem)] max-w-6xl leading-[1.06] flex flex-wrap gap-x-[0.35em] gap-y-3">
         {WORDS.map((w, i) => (
-          <span key={i} data-w className="inline-block mr-[0.3em] will-change-transform">
+          <span key={i} data-w className="inline-block will-change-transform">
             {['SHOUTS.', 'PUNCH,', 'SLAP', 'LAND.'].includes(w) ? (
               <span className="pop px-2 inline-block -rotate-1">{w}</span>
             ) : (
