@@ -45,7 +45,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
     setPct(100)
     // rip the screen apart
     const tl = gsap.timeline({
-      onComplete: () => { setGone(true); onDone() },
+      onComplete: () => { document.body.style.overflow = ''; setGone(true); onDone() },
     })
     tl.to(btn.current, { scale: 1.4, rotation: 6, duration: 0.12, ease: 'power2.in' })
       .to(btn.current, { scale: 0, rotation: -20, duration: 0.2, ease: 'back.in(2)' })
