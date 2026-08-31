@@ -1,62 +1,26 @@
-import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import { Scene } from './components/canvas/Scene'
-import { Preloader } from './components/ui/Preloader'
-import { CursorProvider } from './components/ui/CustomCursor'
-import { Spotlight } from './components/ui/Spotlight'
-import { Navigation } from './components/ui/Navigation'
-import { Footer } from './components/sections/Footer'
-import Home from './pages/Home'
-import WorksPage from './pages/WorksPage'
-import StudioPage from './pages/StudioPage'
-import ContactPage from './pages/ContactPage'
-import { useSmoothScroll, lenis } from './hooks/useSmoothScroll'
-import { useAppStore } from './stores/useAppStore'
+import { Nav } from './brutal/Nav'
+import { Hero } from './brutal/Hero'
+import { Marquee } from './brutal/Marquee'
+import { Manifesto } from './brutal/Manifesto'
+import { WorkGrid } from './brutal/WorkGrid'
+import { Services } from './brutal/Services'
+import { Footer } from './brutal/Footer'
+import { StampLayer } from './brutal/StampLayer'
 
-function ScrollToTop() {
-  const { pathname } = useLocation()
-  useEffect(() => {
-    // jump via Lenis so the smoother's internal state stays in sync
-    if (lenis) lenis.scrollTo(0, { immediate: true })
-    else window.scrollTo(0, 0)
-  }, [pathname])
-  return null
-}
-
-function AnimatedRoutes() {
-  const location = useLocation()
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/works" element={<WorksPage />} />
-        <Route path="/studio" element={<StudioPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-    </AnimatePresence>
-  )
-}
+/* BRUTAL — one loud page. Click anywhere to stamp it. */
 
 export default function App() {
-  const loaded = useAppStore((s) => s.loaded)
-  useSmoothScroll(loaded)
-
   return (
-    <BrowserRouter>
-      <div className="grain">
-        <Preloader />
-        <CursorProvider />
-        <Spotlight />
-        <Scene />
-        <Navigation />
-        <ScrollToTop />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <div id="top" className="noise relative">
+      <StampLayer />
+      <Nav />
+      <Hero />
+      <Marquee items={['GRAPHIC DESIGN', 'WEB BUILDS', 'VIDEO EDITS', 'NO TEMPLATES', 'ALL KILLER']} />
+      <WorkGrid />
+      <Manifesto />
+      <Services />
+      <Marquee reverse items={['SCROLL FASTER', 'HOVER EVERYTHING', 'CLICK EVERYTHING']} speed={22} />
+      <Footer />
+    </div>
   )
 }

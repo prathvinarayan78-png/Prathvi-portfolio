@@ -1,97 +1,131 @@
 @import "tailwindcss";
 
+/* ==========================================================
+   BRUTAL — raw, loud, interactive
+   ========================================================== */
+
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-surface: #1a1a1a;
-  --text-primary: #f5f5f5;
-  --text-muted: rgba(255, 255, 255, 0.5);
-  --accent-blue: #4488ff;
-  --accent-amber: #ffaa33;
-  --accent-chrome: #c0c0c0;
+  --paper: #eaff00;   /* acid */
+  --ink: #0a0a0a;
+  --pop: #ff2f2f;
+  --blue: #2f49ff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  overscroll-behavior: none;
-}
-
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: "IBM Plex Mono", monospace;
+  background: var(--ink);
+  color: #fff;
+  font-family: "Space Mono", monospace;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  cursor: none;
 }
 
-@media (pointer: coarse) {
-  body { cursor: auto; }
+/* inverted mode — the big switch flips the whole site */
+body.inv {
+  background: var(--paper);
+  color: var(--ink);
 }
 
-/* hide scrollbars, noth.in style */
-::-webkit-scrollbar { display: none; }
-html { scrollbar-width: none; -ms-overflow-style: none; }
+::selection { background: var(--paper); color: var(--ink); }
+body.inv ::selection { background: var(--ink); color: var(--paper); }
 
-::selection { background: var(--accent-blue); color: #0a0a0a; }
+.font-black { font-family: "Archivo Black", sans-serif; }
 
-.font-display { font-family: "Syne", sans-serif; }
-.font-mono { font-family: "IBM Plex Mono", monospace; }
-
-/* fluid display type */
-.text-giant {
-  font-size: clamp(3.2rem, 12.5vw, 13rem);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
+/* giant condensed display */
+.mega {
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
 }
 
-/* grain overlay */
-.grain::after {
+/* hard offset shadow blocks */
+.slab {
+  border: 3px solid currentColor;
+  box-shadow: 6px 6px 0 0 currentColor;
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+.slab:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 0 currentColor;
+}
+.slab:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 0 currentColor;
+}
+
+/* acid panel */
+.acid { background: var(--paper); color: var(--ink); }
+.pop { background: var(--pop); color: #fff; }
+.blue { background: var(--blue); color: #fff; }
+
+/* marquee */
+@keyframes marq { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+.marq { animation: marq var(--spd, 18s) linear infinite; will-change: transform; }
+.marq-wrap:hover .marq { animation-duration: calc(var(--spd, 18s) / 4); }
+
+/* shake on hover */
+@keyframes jitter {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  25% { transform: translate(1px,-1px) rotate(0.4deg); }
+  50% { transform: translate(-1px,1px) rotate(-0.4deg); }
+  75% { transform: translate(1px,1px) rotate(0.2deg); }
+}
+.jitter:hover { animation: jitter 0.25s linear infinite; }
+
+/* blink */
+@keyframes blink { 50% { opacity: 0; } }
+.blink { animation: blink 1s steps(1) infinite; }
+
+/* stamps sprayed by clicks */
+.stamp {
+  position: absolute;
+  pointer-events: none;
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  border: 2.5px solid currentColor;
+  padding: 4px 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  animation: stampIn 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  white-space: nowrap;
+  z-index: 5;
+}
+@keyframes stampIn { from { transform: scale(2.4) rotate(var(--rot)); opacity: 0; } to { transform: scale(1) rotate(var(--rot)); opacity: 1; } }
+
+/* noise overlay */
+.noise::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 90;
-  opacity: 0.055;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 98;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* text reveal lines */
-[data-line] {
-  display: block;
-  overflow: hidden;
+/* interactive grid cells */
+.cell {
+  border: 3px solid currentColor;
+  transition: background 0.1s, color 0.1s;
 }
-[data-line] > span {
-  display: block;
-  transform: translateY(110%);
-}
+.cell:hover { background: var(--paper); color: var(--ink); }
+body.inv .cell:hover { background: var(--ink); color: var(--paper); }
 
-/* marquee — GPU composited */
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-.animate-marquee {
-  animation: marquee 24s linear infinite;
-  will-change: transform;
-}
+/* image treatment */
+.img-brut { filter: grayscale(1) contrast(1.15); transition: filter 0.15s; }
+.cell:hover .img-brut, a:hover .img-brut { filter: grayscale(0) contrast(1.05); }
 
-/* promote animated layers to the GPU */
-[data-line] > span,
-[data-hero-line],
-[data-card],
-[data-frame] {
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-/* smoother font rendering during animation */
-.font-display { text-rendering: optimizeLegibility; }
+/* scrollbar — chunky brutalist */
+::-webkit-scrollbar { width: 14px; }
+::-webkit-scrollbar-track { background: var(--ink); border-left: 3px solid var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--paper); border: 3px solid var(--ink); }
+body.inv ::-webkit-scrollbar-track { background: var(--paper); border-left-color: var(--ink); }
+body.inv ::-webkit-scrollbar-thumb { background: var(--ink); border-color: var(--paper); }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; }
+  .marq, .jitter:hover, .blink { animation: none !important; }
 }
