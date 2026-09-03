@@ -54,7 +54,7 @@ export function WorkGrid() {
   }, [])
 
   return (
-    <section ref={root} id="work" className="px-4 md:px-8 py-36 md:py-60 overflow-hidden">
+    <section ref={root} id="work" className="px-4 md:px-8 py-20 md:py-28 overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           THE<span className="text-[#00ffa3]">*</span>WORK

@@ -27,6 +27,7 @@ import { Timeline } from './brutal/Timeline'
 import { StickyStack } from './brutal/StickyStack'
 import { ZoomPunch } from './brutal/ZoomPunch'
 import { Orbit } from './brutal/Orbit'
+import { Gap } from './brutal/Gap'
 
 /* BRUTAL — MAXIMUM LENGTH EDITION. 20 sections.
    Click anywhere to stamp. ☀ bottom-left for day mode. */
@@ -45,29 +46,49 @@ export default function App() {
 
       <Hero ready={ready} />
       <Marquee items={['GRAPHIC DESIGN', 'WEB BUILDS', 'VIDEO EDITS', 'NO TEMPLATES', 'ALL KILLER']} />
+      <Gap />
       <WorkGrid />
+      <Gap />
       <Desk />
+      <Gap size="sm" />
       <ScrollRail />
+      <Gap size="sm" />
       <Manifesto />
+      <Gap />
 
       <div id="process"><Process /></div>
+      <Gap />
       <StickyStack />
+      <Gap />
       <div id="services"><Services /></div>
+      <Gap />
       <BrainSplit />
+      <Gap size="sm" />
       <Stats />
+      <Gap />
       <Timeline />
+      <Gap />
       <BeforeAfter />
+      <Gap />
       <Alphabet />
+      <Gap />
       <Orbit />
+      <Gap />
 
       <div id="lab"><Lab /></div>
+      <Gap />
       <Meanwhile />
+      <Gap />
       <Reviews />
+      <Gap />
       <ZoomPunch />
-
+      <Gap />
       <Status />
+      <Gap size="sm" />
       <Marquee reverse items={['SCROLL FASTER', 'HOVER EVERYTHING', 'CLICK EVERYTHING']} speed={22} />
+      <Gap />
       <div id="faq"><Faq /></div>
+      <Gap />
       <Footer />
     </div>
   )

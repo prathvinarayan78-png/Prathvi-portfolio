@@ -13,7 +13,7 @@ export function BeforeAfter() {
   }
 
   return (
-    <section className="px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current">
+    <section className="px-4 md:px-8 py-20 md:py-28 border-t-[3px] border-current">
       <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           RAW<span className="text-[#ff4d00]">*</span>VS*DONE
