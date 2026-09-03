@@ -19,6 +19,10 @@ import { Faq } from './brutal/Faq'
 import { Meanwhile } from './brutal/Meanwhile'
 import { SideNav } from './brutal/SideNav'
 import { DayToggle } from './brutal/DayToggle'
+import { Desk } from './brutal/Desk'
+import { Status } from './brutal/Status'
+import { BrainSplit } from './brutal/BrainSplit'
+import { BeforeAfter } from './brutal/BeforeAfter'
 import { Timeline } from './brutal/Timeline'
 import { StickyStack } from './brutal/StickyStack'
 import { ZoomPunch } from './brutal/ZoomPunch'
@@ -42,14 +46,17 @@ export default function App() {
       <Hero ready={ready} />
       <Marquee items={['GRAPHIC DESIGN', 'WEB BUILDS', 'VIDEO EDITS', 'NO TEMPLATES', 'ALL KILLER']} />
       <WorkGrid />
+      <Desk />
       <ScrollRail />
       <Manifesto />
 
       <div id="process"><Process /></div>
       <StickyStack />
       <div id="services"><Services /></div>
+      <BrainSplit />
       <Stats />
       <Timeline />
+      <BeforeAfter />
       <Alphabet />
       <Orbit />
 
@@ -58,6 +65,7 @@ export default function App() {
       <Reviews />
       <ZoomPunch />
 
+      <Status />
       <Marquee reverse items={['SCROLL FASTER', 'HOVER EVERYTHING', 'CLICK EVERYTHING']} speed={22} />
       <div id="faq"><Faq /></div>
       <Footer />
