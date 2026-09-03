@@ -18,18 +18,18 @@ const ZONES: { at: number; word: string }[] = [
 ]
 
 const NOTES = [
-  { x: '12%', y: '18%', t: 'FIG.01 — ATTITUDE', speed: 0.05 },
-  { x: '78%', y: '26%', t: 'REV.9 // APPROVED', speed: 0.09 },
-  { x: '8%', y: '64%', t: 'SCALE 1:LOUD', speed: 0.07 },
-  { x: '70%', y: '74%', t: 'DO NOT SOFTEN', speed: 0.04 },
-  { x: '30%', y: '86%', t: 'TOLERANCE ±0MM', speed: 0.1 },
+  { x: '12%', y: 18, t: 'FIG.01 — ATTITUDE', speed: 0.05 },
+  { x: '78%', y: 26, t: 'REV.9 // APPROVED', speed: 0.09 },
+  { x: '8%', y: 64, t: 'SCALE 1:LOUD', speed: 0.07 },
+  { x: '70%', y: 74, t: 'DO NOT SOFTEN', speed: 0.04 },
+  { x: '30%', y: 86, t: 'TOLERANCE ±0MM', speed: 0.1 },
 ]
 
 const MARKS = [
-  { x: '22%', y: '34%', speed: 0.06 },
-  { x: '58%', y: '14%', speed: 0.1 },
-  { x: '84%', y: '52%', speed: 0.05 },
-  { x: '40%', y: '70%', speed: 0.08 },
+  { x: '22%', y: 34, speed: 0.06 },
+  { x: '58%', y: 14, speed: 0.1 },
+  { x: '84%', y: 52, speed: 0.05 },
+  { x: '40%', y: 70, speed: 0.08 },
 ]
 
 export function Backdrop() {
@@ -61,18 +61,16 @@ export function Backdrop() {
       // scanline sweeps down the screen tied to overall progress
       if (scan.current)
         scan.current.style.transform = `translate3d(0, ${p * 100}vh, 0)`
-      // annotation/marker layer: each child drifts at its own speed and
-      // WRAPS — exits the top, re-enters from the bottom, forever visible
+      // furniture: absolute y computed from data-y (viewport %), drifts up
+      // with scroll and wraps through a -10%..110% band — always on screen
       if (parallax.current) {
         const H = innerHeight
-        const cycle = H * 1.4
+        const cycle = H * 1.2
         for (const el of Array.from(parallax.current.children) as HTMLElement[]) {
           const sp = Number(el.dataset.speed || 0.05)
-          if (!el.dataset.base) el.dataset.base = String(el.offsetTop)
-          const base = Number(el.dataset.base)
-          const raw = base - scrollY * sp
-          const wrapped = ((raw % cycle) + cycle) % cycle - 0.2 * H
-          el.style.transform = `translate3d(0, ${(wrapped - base).toFixed(1)}px, 0)`
+          const y0 = (Number(el.dataset.y) / 100) * H + 0.1 * H
+          const y = ((((y0 - scrollY * sp) % cycle) + cycle) % cycle) - 0.1 * H
+          el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`
         }
       }
 
@@ -164,8 +162,9 @@ export function Backdrop() {
           <span
             key={n.t}
             data-speed={n.speed}
+            data-y={n.y}
             className="absolute font-bold text-[9px] md:text-[11px] uppercase tracking-[0.2em] opacity-[0.14] border border-current px-2 py-1 will-change-transform"
-            style={{ left: n.x, top: n.y }}
+            style={{ left: n.x, top: 0 }}
           >
             {n.t}
           </span>
@@ -175,8 +174,9 @@ export function Backdrop() {
           <span
             key={i}
             data-speed={m.speed}
+            data-y={m.y}
             className="absolute opacity-[0.14] will-change-transform"
-            style={{ left: m.x, top: m.y }}
+            style={{ left: m.x, top: 0 }}
           >
             {/* crosshair */}
             <span className="block relative w-8 h-8 md:w-10 md:h-10">
@@ -188,16 +188,16 @@ export function Backdrop() {
         ))}
 
         {/* registration circles */}
-        <span data-speed={0.06} className="absolute left-[88%] top-[12%] w-14 h-14 border border-current rounded-full opacity-[0.1] will-change-transform">
+        <span data-speed={0.06} data-y={12} className="absolute left-[88%] top-0 w-14 h-14 border border-current rounded-full opacity-[0.1] will-change-transform">
           <span className="absolute inset-[30%] border border-current rounded-full" />
         </span>
-        <span data-speed={0.09} className="absolute left-[5%] top-[40%] w-20 h-20 border border-current rounded-full opacity-[0.08] will-change-transform">
+        <span data-speed={0.09} data-y={40} className="absolute left-[5%] top-0 w-20 h-20 border border-current rounded-full opacity-[0.08] will-change-transform">
           <span className="absolute inset-[25%] border border-current rounded-full" />
           <span className="absolute inset-[45%] bg-current rounded-full" />
         </span>
 
         {/* dimension line */}
-        <span data-speed={0.07} className="absolute left-[35%] top-[8%] w-40 opacity-[0.12] will-change-transform">
+        <span data-speed={0.07} data-y={8} className="absolute left-[35%] top-0 w-40 opacity-[0.12] will-change-transform">
           <span className="block h-px bg-current relative">
             <span className="absolute -left-0.5 -top-1 h-2 w-px bg-current" />
             <span className="absolute -right-0.5 -top-1 h-2 w-px bg-current" />
