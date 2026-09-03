@@ -40,7 +40,7 @@ export function StickyStack() {
   }, [])
 
   return (
-    <section ref={root} className="relative px-4 md:px-8 py-28 md:py-44 border-t-[3px] border-current">
+    <section ref={root} className="relative px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current">
       <div className="flex items-end justify-between mb-12">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           THE<span className="text-[#00ffa3]">*</span>RULES

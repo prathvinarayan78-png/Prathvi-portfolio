@@ -88,7 +88,7 @@ export function Process() {
   }, [])
 
   return (
-    <section ref={root} className="relative px-4 md:px-8 pt-28 md:pt-44 pb-28 md:pb-44 overflow-hidden">
+    <section ref={root} className="relative px-4 md:px-8 pt-36 md:pt-60 pb-36 md:pb-60 overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           HOW<span className="text-[#00ffa3]">*</span>I*WORK

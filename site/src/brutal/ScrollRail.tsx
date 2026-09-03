@@ -48,7 +48,7 @@ export function ScrollRail() {
   }, [])
 
   return (
-    <section ref={root} className="relative overflow-hidden border-y-[3px] border-current py-8 md:py-12 bg-page">
+    <section ref={root} className="relative overflow-hidden border-y-[3px] border-current py-14 md:py-20 bg-page">
       {/* corner tags */}
       <div className="flex justify-between px-4 md:px-8 mb-5 font-bold text-[10px] md:text-xs uppercase">
         <span className="border-[2.5px] border-current px-2 py-1">THE LOOP</span>

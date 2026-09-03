@@ -15,7 +15,7 @@ export function Services() {
   const [hits, setHits] = useState(0)
 
   return (
-    <section className="px-4 md:px-8 py-28 md:py-44">
+    <section className="px-4 md:px-8 py-36 md:py-60">
       <div className="flex items-end justify-between mb-12 md:mb-16">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           I<span className="text-[#2f49ff]">*</span>DO

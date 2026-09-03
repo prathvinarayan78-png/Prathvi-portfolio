@@ -83,7 +83,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
   const invert = () => toggleDay()
 
   return (
-    <section ref={root} className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-6 overflow-hidden">
+    <section ref={root} className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-14 md:pb-20 overflow-hidden">
       {/* corner meta */}
       <div className="flex justify-between font-bold text-[11px] md:text-xs uppercase">
         <span>Portfolio v3.0 — RAW</span>
