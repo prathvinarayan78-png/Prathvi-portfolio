@@ -61,11 +61,18 @@ export function Backdrop() {
       // scanline sweeps down the screen tied to overall progress
       if (scan.current)
         scan.current.style.transform = `translate3d(0, ${p * 100}vh, 0)`
-      // annotation/marker layer: each child drifts at its own speed
+      // annotation/marker layer: each child drifts at its own speed and
+      // WRAPS — exits the top, re-enters from the bottom, forever visible
       if (parallax.current) {
+        const H = innerHeight
+        const cycle = H * 1.4
         for (const el of Array.from(parallax.current.children) as HTMLElement[]) {
           const sp = Number(el.dataset.speed || 0.05)
-          el.style.transform = `translate3d(0, ${-(scrollY * sp) % (innerHeight * 1.4)}px, 0)`
+          if (!el.dataset.base) el.dataset.base = String(el.offsetTop)
+          const base = Number(el.dataset.base)
+          const raw = base - scrollY * sp
+          const wrapped = ((raw % cycle) + cycle) % cycle - 0.2 * H
+          el.style.transform = `translate3d(0, ${(wrapped - base).toFixed(1)}px, 0)`
         }
       }
 
