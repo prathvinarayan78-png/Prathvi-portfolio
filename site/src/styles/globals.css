@@ -92,6 +92,17 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 }
 .jitter:hover { animation: jitter 0.25s linear infinite; }
 
+/* header glitch + ticker */
+@keyframes glitchShift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-1.5px, 1px); }
+  100% { transform: translate(1.5px, -1px); }
+}
+@keyframes tickerIn {
+  from { transform: translateY(110%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 /* backdrop watermark swap */
 @keyframes wmIn {
   from { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
