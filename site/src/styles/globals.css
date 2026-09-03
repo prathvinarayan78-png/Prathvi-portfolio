@@ -92,6 +92,12 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 }
 .jitter:hover { animation: jitter 0.25s linear infinite; }
 
+/* backdrop watermark swap */
+@keyframes wmIn {
+  from { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 0.07; }
+}
+
 /* terminal caret */
 .caret::after {
   content: "█";

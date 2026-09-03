@@ -28,6 +28,7 @@ import { StickyStack } from './brutal/StickyStack'
 import { ZoomPunch } from './brutal/ZoomPunch'
 import { Orbit } from './brutal/Orbit'
 import { Gap } from './brutal/Gap'
+import { Backdrop } from './brutal/Backdrop'
 
 /* BRUTAL — MAXIMUM LENGTH EDITION. 20 sections.
    Click anywhere to stamp. ☀ bottom-left for day mode. */
@@ -38,12 +39,14 @@ export default function App() {
   return (
     <div id="top" className="noise relative">
       <Loader onDone={() => setReady(true)} />
+      <Backdrop />
       <StampLayer />
       <Progress />
       <SideNav />
       <DayToggle />
       <Nav />
 
+      <div className="relative z-10">
       <Hero ready={ready} />
       <Marquee items={['GRAPHIC DESIGN', 'WEB BUILDS', 'VIDEO EDITS', 'NO TEMPLATES', 'ALL KILLER']} />
       <Gap />
@@ -90,6 +93,7 @@ export default function App() {
       <div id="faq"><Faq /></div>
       <Gap />
       <Footer />
+      </div>
     </div>
   )
 }
