@@ -92,6 +92,43 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 }
 .jitter:hover { animation: jitter 0.25s linear infinite; }
 
+/* ===== beauty pass ===== */
+
+/* halftone dot texture for accent panels */
+.halftone {
+  background-image: radial-gradient(currentColor 1px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+/* accent underline flourish */
+.underline-pop {
+  background-image: linear-gradient(#ff4d00, #ff4d00);
+  background-size: 100% 0.14em;
+  background-position: 0 88%;
+  background-repeat: no-repeat;
+}
+
+/* soft glow behind key accents */
+.glow-orange { box-shadow: 0 0 44px -8px rgba(255, 77, 0, 0.5); }
+.glow-mint { box-shadow: 0 0 44px -10px rgba(0, 255, 163, 0.45); }
+
+/* slab hover: subtle accent border swap */
+.slab-hot { transition: border-color 0.15s, box-shadow 0.12s ease, transform 0.12s ease; }
+.slab-hot:hover { border-color: #ff4d00; }
+
+/* diagonal stripes for caution accents */
+.stripes {
+  background-image: repeating-linear-gradient(-45deg, currentColor 0 6px, transparent 6px 14px);
+  opacity: 0.1;
+}
+
+/* big number outline style */
+.num-ghost {
+  color: transparent;
+  -webkit-text-stroke: 2px currentColor;
+  opacity: 0.25;
+}
+
 /* header glitch + ticker */
 @keyframes glitchShift {
   0% { transform: translate(0, 0); }

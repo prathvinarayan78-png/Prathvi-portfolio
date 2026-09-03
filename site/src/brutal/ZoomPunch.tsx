@@ -63,7 +63,7 @@ export function ZoomPunch() {
         ref={word}
         onClick={punch}
         data-noclick
-        className="mega text-[clamp(4rem,14vw,13rem)] text-[#ff4d00] will-change-transform select-none cursor-pointer leading-none"
+        className="mega text-[clamp(4rem,14vw,13rem)] text-[#ff4d00] will-change-transform select-none cursor-pointer leading-none" style={{ filter: "drop-shadow(0 0 34px rgba(255,77,0,0.45))" }}
       >
         HIRE*ME
       </div>

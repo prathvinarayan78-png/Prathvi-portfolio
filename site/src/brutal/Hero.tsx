@@ -86,9 +86,15 @@ export function Hero({ ready = true }: { ready?: boolean }) {
     <section ref={root} className="relative min-h-[100svh] flex flex-col justify-between px-4 md:px-8 pt-24 pb-14 md:pb-20 overflow-hidden">
       {/* corner meta */}
       <div className="flex justify-between font-bold text-[11px] md:text-xs uppercase">
-        <span>Portfolio v3.0 — RAW</span>
-        <span className="tabular-nums">DEL {time} IST</span>
+        <span className="border-[2.5px] border-current px-2 py-1 bg-page">Portfolio v3.0 — RAW</span>
+        <span className="tabular-nums border-[2.5px] border-current px-2 py-1 bg-page">DEL {time} IST</span>
       </div>
+
+      {/* corner frame marks */}
+      <span data-corner className="pointer-events-none absolute top-20 left-4 w-7 h-7 border-l-[3px] border-t-[3px] border-[#ff4d00]" />
+      <span data-corner className="pointer-events-none absolute top-20 right-4 w-7 h-7 border-r-[3px] border-t-[3px] border-[#ff4d00]" />
+      <span data-corner className="pointer-events-none absolute bottom-4 left-4 w-7 h-7 border-l-[3px] border-b-[3px] border-[#ff4d00]" />
+      <span data-corner className="pointer-events-none absolute bottom-4 right-4 w-7 h-7 border-r-[3px] border-b-[3px] border-[#ff4d00]" />
 
       <div className="relative">
         <SlamLine text={LINES[0]} delay={0.2} go={ready} />

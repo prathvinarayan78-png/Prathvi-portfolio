@@ -93,14 +93,15 @@ export function Loader({ onDone }: { onDone: () => void }) {
       <div ref={botHalf} className="absolute inset-x-0 bottom-0 h-1/2 bg-[#0a0a0a] overflow-hidden">
         <div className="absolute top-5 left-4 right-4 flex flex-col items-center gap-5 text-white">
           {/* progress slab */}
-          <div className="w-full max-w-xl h-6 border-[3px] border-white">
+          <div className="w-full max-w-xl h-6 border-[3px] border-white relative overflow-hidden">
+            <div aria-hidden className="stripes absolute inset-0 text-white" />
             <div className="h-full bg-[#ff4d00] transition-[width] duration-100" style={{ width: `${pct}%` }} />
           </div>
 
           <button
             ref={btn}
             onClick={mash}
-            className="slab bg-[#ff4d00] text-[#0a0a0a] font-black uppercase text-lg md:text-3xl px-10 md:px-16 py-5 md:py-7 will-change-transform"
+            className="slab glow-orange bg-[#ff4d00] text-[#0a0a0a] font-black uppercase text-lg md:text-3xl px-10 md:px-16 py-5 md:py-7 will-change-transform"
             style={{ boxShadow: '6px 6px 0 0 #fff' }}
           >
             {pct === 0 ? 'MASH TO ENTER' : taunt}

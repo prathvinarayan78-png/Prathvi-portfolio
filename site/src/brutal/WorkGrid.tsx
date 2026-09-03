@@ -56,7 +56,8 @@ export function WorkGrid() {
   return (
     <section ref={root} id="work" className="px-4 md:px-8 py-20 md:py-28 overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
+        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+          <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/01</span>
           THE<span className="text-[#00ffa3]">*</span>WORK
         </h2>
         <span className="font-bold text-xs md:text-sm">({ROWS.length}) PIECES</span>
@@ -89,7 +90,7 @@ export function WorkGrid() {
               >
                 <div className="overflow-hidden">
                   <div className="grid md:grid-cols-2 gap-6 md:gap-10 px-2 md:px-4 pb-6 pt-2">
-                    <div className="slab overflow-hidden" data-noclick>
+                    <div className="slab slab-hot overflow-hidden" data-noclick>
                       <img src={r.img} alt={r.title} loading="lazy" className="img-brut w-full aspect-video object-cover" />
                     </div>
                     <div className="flex flex-col justify-between gap-4">

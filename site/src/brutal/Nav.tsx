@@ -141,7 +141,7 @@ export function Nav() {
           <a
             href="#contact"
             data-noclick
-            className="flex items-center gap-2 px-4 md:px-6 border-l-[3px] border-current bg-[#ff4d00] text-[#0a0a0a] hover:bg-[#00ffa3] transition-colors relative overflow-hidden group"
+            className="flex items-center gap-2 px-4 md:px-6 border-l-[3px] border-current bg-[#ff4d00] text-[#0a0a0a] hover:bg-[#00ffa3] transition-colors relative overflow-hidden group glow-orange"
           >
             <span className="w-2 h-2 rounded-full bg-[#0a0a0a] blink" />
             Hire me

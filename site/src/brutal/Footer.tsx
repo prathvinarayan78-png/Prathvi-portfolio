@@ -136,7 +136,7 @@ export function Footer() {
           <button
             data-noclick
             onClick={smash}
-            className="slab pop font-black uppercase text-base md:text-2xl px-8 md:px-14 py-4 md:py-6 jitter"
+            className="slab pop glow-mint font-black uppercase text-base md:text-2xl px-8 md:px-14 py-4 md:py-6 jitter"
           >
             {smashes === 0 && 'SMASH TO EMAIL'}
             {smashes === 1 && 'HARDER.'}
