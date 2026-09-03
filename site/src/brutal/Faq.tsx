@@ -16,7 +16,7 @@ export function Faq() {
 
   return (
     <section className="px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           REAL<span className="text-[#ff4d00]">*</span>TALK
         </h2>
@@ -31,7 +31,7 @@ export function Faq() {
               <button
                 data-noclick
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="w-full flex items-center justify-between gap-4 py-4 md:py-5 text-left group hover:bg-[#00ffa3] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
+                className="w-full flex items-center justify-between gap-4 py-6 md:py-7 text-left group hover:bg-[#00ffa3] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
               >
                 <span className="font-black uppercase text-sm md:text-xl">{item.q}</span>
                 <span className="font-black text-2xl md:text-3xl shrink-0 group-hover:rotate-90 transition-transform duration-150">

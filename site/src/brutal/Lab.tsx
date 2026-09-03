@@ -95,14 +95,14 @@ export function Lab() {
 
   return (
     <section ref={root} className="px-4 md:px-8 py-36 md:py-60">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           THE<span className="text-[#2f49ff]">*</span>LAB
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">useless toys. play anyway.</span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
         <div data-lab className="slab aspect-square" ><Wobble /></div>
         <div data-lab className="slab aspect-square"><Counter /></div>
         <div data-lab className="slab aspect-square"><Eyes /></div>

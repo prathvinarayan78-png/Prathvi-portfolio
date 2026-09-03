@@ -55,7 +55,7 @@ export function Status() {
 
   return (
     <section ref={root} className="px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           CONTROL<span className="text-[#2f49ff]">*</span>ROOM
         </h2>
@@ -67,7 +67,7 @@ export function Status() {
           <div
             key={r.k}
             data-row
-            className="flex items-center justify-between gap-4 px-3 md:px-6 py-3.5 md:py-5 border-b-[3px] border-current last:border-b-0 hover:bg-[#ff4d00] hover:text-[#0a0a0a] transition-colors"
+            className="flex items-center justify-between gap-4 px-3 md:px-6 py-5 md:py-7 border-b-[3px] border-current last:border-b-0 hover:bg-[#ff4d00] hover:text-[#0a0a0a] transition-colors"
           >
             <span className="font-bold text-[10px] md:text-sm uppercase opacity-70">{r.k}</span>
             <span

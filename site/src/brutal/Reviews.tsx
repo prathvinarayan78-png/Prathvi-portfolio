@@ -37,14 +37,14 @@ export function Reviews() {
 
   return (
     <section ref={root} className="px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           HEAR<span className="text-[#00ffa3]">*</span>SAY
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">reviews from the future*</span>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-7 md:gap-12">
         {REVIEWS.map((r) => (
           <figure
             key={r.who}

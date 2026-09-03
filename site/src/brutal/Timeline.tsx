@@ -58,7 +58,7 @@ export function Timeline() {
         <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[6px] -translate-x-1/2 bg-current opacity-15" />
         <div ref={line} className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[6px] -translate-x-1/2 bg-[#ff4d00] origin-top will-change-transform" />
 
-        <div className="space-y-10 md:space-y-16">
+        <div className="space-y-14 md:space-y-24">
           {EVENTS.map((e, i) => (
             <div
               key={e.y}

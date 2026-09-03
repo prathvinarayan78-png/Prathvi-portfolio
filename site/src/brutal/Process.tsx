@@ -106,7 +106,7 @@ export function Process() {
           className="absolute left-3 md:left-1/2 top-0 bottom-0 w-[5px] md:w-[6px] -translate-x-1/2 bg-[#ff4d00] origin-top will-change-transform"
         />
 
-        <div className="space-y-12 md:space-y-20">
+        <div className="space-y-16 md:space-y-28">
           {STEPS.map((s, i) => {
             const left = i % 2 === 0
             return (

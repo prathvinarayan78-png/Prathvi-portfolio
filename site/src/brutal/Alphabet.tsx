@@ -38,14 +38,14 @@ export function Alphabet() {
 
   return (
     <section ref={root} className="px-4 md:px-8 py-36 md:py-60 border-b-[3px] border-current">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           A<span className="text-[#ff4d00]">—</span>Z
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">26 letters. 26 weapons. hover them.</span>
       </div>
 
-      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 gap-[3px]" style={{ perspective: '800px' }}>
+      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 gap-2 md:gap-3" style={{ perspective: '800px' }}>
         {Object.entries(AZ).map(([l, skill]) => (
           <div
             key={l}

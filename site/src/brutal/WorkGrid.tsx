@@ -55,7 +55,7 @@ export function WorkGrid() {
 
   return (
     <section ref={root} id="work" className="px-4 md:px-8 py-36 md:py-60 overflow-hidden">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           THE<span className="text-[#00ffa3]">*</span>WORK
         </h2>
@@ -70,7 +70,7 @@ export function WorkGrid() {
               <button
                 data-noclick
                 onClick={() => setOpen(isOpen ? null : r.id)}
-                className="w-full grid grid-cols-[auto_1fr_auto] md:grid-cols-[80px_1fr_auto_auto] items-center gap-4 md:gap-8 py-4 md:py-5 text-left group hover:bg-[#ff4d00] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
+                className="w-full grid grid-cols-[auto_1fr_auto] md:grid-cols-[80px_1fr_auto_auto] items-center gap-4 md:gap-8 py-6 md:py-8 text-left group hover:bg-[#ff4d00] hover:text-[#0a0a0a] transition-colors px-2 md:px-4"
               >
                 <span className="font-black text-lg md:text-2xl">{r.n}</span>
                 <span className="mega text-[clamp(1.3rem,4.2vw,3.4rem)] group-hover:translate-x-3 transition-transform duration-150">
@@ -88,7 +88,7 @@ export function WorkGrid() {
                 style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
               >
                 <div className="overflow-hidden">
-                  <div className="grid md:grid-cols-2 gap-4 md:gap-6 px-2 md:px-4 pb-6 pt-2">
+                  <div className="grid md:grid-cols-2 gap-6 md:gap-10 px-2 md:px-4 pb-6 pt-2">
                     <div className="slab overflow-hidden" data-noclick>
                       <img src={r.img} alt={r.title} loading="lazy" className="img-brut w-full aspect-video object-cover" />
                     </div>

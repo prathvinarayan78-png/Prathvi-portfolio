@@ -45,14 +45,14 @@ export function BrainSplit() {
 
   return (
     <section ref={root} className="px-4 md:px-8 py-36 md:py-60 border-t-[3px] border-current overflow-hidden">
-      <div className="flex items-end justify-between mb-12 md:mb-16">
+      <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
           ONE<span className="text-[#00ffa3]">*</span>BRAIN
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">zero handoffs. zero lost-in-translation.</span>
       </div>
 
-      <div className="relative grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+      <div className="relative grid md:grid-cols-3 gap-6 md:gap-10 max-w-5xl mx-auto">
         {HALVES.map((h) => (
           <div
             key={h.t}

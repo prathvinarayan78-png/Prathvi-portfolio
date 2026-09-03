@@ -48,7 +48,7 @@ export function StickyStack() {
         <span className="font-bold text-xs md:text-sm uppercase">cards stack. keep scrolling.</span>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-3xl mx-auto space-y-12">
         {RULES.map((r) => (
           <div
             key={r.n}
