@@ -99,14 +99,6 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 .shadow-pop-mint:hover { box-shadow: 8px 8px 0 0 #00ffa3 !important; }
 .shadow-pop-blue:hover { box-shadow: 8px 8px 0 0 #2f49ff !important; }
 
-/* title wipe-in */
-[data-wipe] {
-  clip-path: inset(0 100% 0 0);
-}
-[data-wipe].wiped {
-  animation: wipeIn 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-@keyframes wipeIn { to { clip-path: inset(0 0% 0 0); } }
 
 /* duotone image flavor — orange shadows in the dark */
 .duo {

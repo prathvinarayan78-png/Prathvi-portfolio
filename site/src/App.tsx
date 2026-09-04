@@ -31,6 +31,10 @@ import { Gap } from './brutal/Gap'
 import { Backdrop } from './brutal/Backdrop'
 import { Trail } from './brutal/Trail'
 import { useEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 /* BRUTAL — MAXIMUM LENGTH EDITION. 20 sections.
    Click anywhere to stamp. ☀ bottom-left for day mode. */
@@ -38,15 +42,25 @@ import { useEffect } from 'react'
 export default function App() {
   const [ready, setReady] = useState(false)
 
-  // wipe-in section titles when they enter
+  // wipe-in section titles when they enter (GSAP — same pattern as all
+  // other reveals; titles are visible by default if JS/observer fails)
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('wiped')),
-      { threshold: 0.4 },
-    )
-    document.querySelectorAll('[data-wipe]').forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [ready])
+    const triggers: ScrollTrigger[] = []
+    document.querySelectorAll<HTMLElement>('[data-wipe]').forEach((el) => {
+      const tween = gsap.fromTo(
+        el,
+        { clipPath: 'inset(0 100% 0 0)' },
+        {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 0.9,
+          ease: 'power4.inOut',
+          scrollTrigger: { trigger: el, start: 'top 88%' },
+        },
+      )
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger)
+    })
+    return () => triggers.forEach((t) => t.kill())
+  }, [])
 
   return (
     <div id="top" className="noise vignette relative">
