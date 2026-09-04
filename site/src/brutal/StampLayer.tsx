@@ -34,7 +34,7 @@ export function StampLayer() {
   }, [])
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+    <div className="absolute inset-0 z-[60] pointer-events-none overflow-hidden" aria-hidden>
       {stamps.map((s) => (
         <span
           key={s.id}

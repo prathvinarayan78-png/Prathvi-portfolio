@@ -82,7 +82,7 @@ export default function App() {
       <Gap size="sm" />
       <Stats />
       <Gap />
-      <Timeline />
+      <div id="road"><Timeline /></div>
       <Gap />
       <BeforeAfter />
       <Gap />

@@ -45,7 +45,7 @@ export function Reviews() {
         <span className="font-bold text-xs md:text-sm uppercase">reviews from the future*</span>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-7 md:gap-12">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-7 md:gap-12 pt-4">
         {REVIEWS.map((r) => (
           <figure
             key={r.who}

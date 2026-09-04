@@ -42,7 +42,8 @@ export function StickyStack() {
   return (
     <section ref={root} className="relative px-4 md:px-8 py-20 md:py-28 border-t-[3px] border-current">
       <div className="flex items-end justify-between mb-12">
-        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)]">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+          <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/04</span>
           THE<span className="text-[#00ffa3]">*</span>RULES
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">cards stack. keep scrolling.</span>
@@ -53,7 +54,7 @@ export function StickyStack() {
           <div
             key={r.n}
             data-rule
-            className={`slab ${r.c} sticky top-[110px] md:top-[120px] p-6 md:p-10 will-change-transform`}
+            className={`slab ${r.c} sticky top-[84px] md:top-[96px] p-6 md:p-10 will-change-transform`}
             data-noclick
           >
             <span className="font-black text-[10px] md:text-xs">{r.n}</span>

@@ -7,6 +7,7 @@ const SECTIONS = [
   { id: 'work', label: 'WORK' },
   { id: 'process', label: 'HOW' },
   { id: 'services', label: 'I DO' },
+  { id: 'road', label: 'ROAD' },
   { id: 'lab', label: 'LAB' },
   { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'TALK' },

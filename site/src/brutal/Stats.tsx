@@ -52,6 +52,14 @@ export function Stats() {
         PROOF PROOF PROOF
       </span>
 
+      <div className="flex items-end justify-between mb-16 md:mb-24 px-4 md:px-8">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+          <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/07</span>
+          PROOF<span className="text-[#ff4d00]">*</span>
+        </h2>
+        <span className="font-bold text-xs md:text-sm uppercase hidden md:block">numbers don't lie</span>
+      </div>
+
       <div className="relative grid grid-cols-2 md:grid-cols-4 gap-y-12 px-4 md:px-8">
         {STATS.map((s) => (
           <div key={s.label} className="text-center">
