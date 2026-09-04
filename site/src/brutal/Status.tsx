@@ -56,7 +56,7 @@ export function Status() {
   return (
     <section ref={root} className="px-4 md:px-8 py-20 md:py-28 border-t-[3px] border-current">
       <div className="flex items-end justify-between mb-16 md:mb-24">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/13</span>
           CONTROL<span className="text-[#2f49ff]">*</span>ROOM
         </h2>

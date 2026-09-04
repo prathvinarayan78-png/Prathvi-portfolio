@@ -47,7 +47,7 @@ export function Timeline() {
   return (
     <section ref={root} className="relative px-4 md:px-8 py-20 md:py-28 border-t-[3px] border-current overflow-hidden">
       <div className="flex items-end justify-between mb-12">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)]">
           THE<span className="text-[#ff4d00]">*</span>ROAD
         </h2>
         <span className="font-bold text-xs md:text-sm uppercase">scroll draws the line</span>

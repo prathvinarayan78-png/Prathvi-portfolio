@@ -90,7 +90,7 @@ export function Process() {
   return (
     <section ref={root} className="relative px-4 md:px-8 pt-20 md:pt-28 pb-20 md:pb-28 overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/03</span>
           HOW<span className="text-[#00ffa3]">*</span>I*WORK
         </h2>
@@ -126,7 +126,7 @@ export function Process() {
                 />
                 <span className="md:hidden absolute top-10 -left-4 h-[5px] w-4 bg-[#ff4d00]" />
 
-                <div className={`slab ${s.c} p-4 md:p-7 overflow-hidden`} data-noclick>
+                <div className={`slab shadow-pop-blue ${s.c} p-4 md:p-7 overflow-hidden`} data-noclick>
                   <div className="flex items-start justify-between gap-4">
                     <span
                       data-badge

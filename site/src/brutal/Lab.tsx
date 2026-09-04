@@ -96,7 +96,7 @@ export function Lab() {
   return (
     <section ref={root} className="px-4 md:px-8 py-20 md:py-28">
       <div className="flex items-end justify-between mb-16 md:mb-24">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/11</span>
           THE<span className="text-[#2f49ff]">*</span>LAB
         </h2>
@@ -104,10 +104,10 @@ export function Lab() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-        <div data-lab className="slab aspect-square" ><Wobble /></div>
-        <div data-lab className="slab aspect-square"><Counter /></div>
-        <div data-lab className="slab aspect-square"><Eyes /></div>
-        <div data-lab className="slab aspect-square"><Slider /></div>
+        <div data-lab className="slab shadow-pop-mint aspect-square" ><Wobble /></div>
+        <div data-lab className="slab shadow-pop-mint aspect-square"><Counter /></div>
+        <div data-lab className="slab shadow-pop-mint aspect-square"><Eyes /></div>
+        <div data-lab className="slab shadow-pop-mint aspect-square"><Slider /></div>
       </div>
     </section>
   )

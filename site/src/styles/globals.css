@@ -94,6 +94,64 @@ body.day .noise::after, body.inv .noise::after { opacity: 0.045; }
 
 /* ===== beauty pass ===== */
 
+/* colored hard shadows — hover states get personality */
+.shadow-pop-orange:hover { box-shadow: 8px 8px 0 0 #ff4d00 !important; }
+.shadow-pop-mint:hover { box-shadow: 8px 8px 0 0 #00ffa3 !important; }
+.shadow-pop-blue:hover { box-shadow: 8px 8px 0 0 #2f49ff !important; }
+
+/* title wipe-in */
+[data-wipe] {
+  clip-path: inset(0 100% 0 0);
+}
+[data-wipe].wiped {
+  animation: wipeIn 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+@keyframes wipeIn { to { clip-path: inset(0 0% 0 0); } }
+
+/* duotone image flavor — orange shadows in the dark */
+.duo {
+  filter: grayscale(1) contrast(1.1);
+  position: relative;
+}
+.duo-wrap { position: relative; }
+.duo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ff4d00;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.duo-wrap:hover::after { opacity: 0; }
+.duo-wrap:hover .duo { filter: grayscale(0) contrast(1.03); }
+.duo, .duo-wrap::after { transition: filter 0.3s, opacity 0.25s; }
+
+/* cursor trail bits */
+.trail-bit {
+  position: fixed;
+  width: 7px; height: 7px;
+  pointer-events: none;
+  z-index: 97;
+}
+
+/* edge vignette so the page has depth at the borders */
+.vignette::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 89;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.28), transparent 8%, transparent 92%, rgba(0,0,0,0.28));
+}
+body.day .vignette::before {
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.07), transparent 8%, transparent 92%, rgba(0,0,0,0.07));
+}
+
+
 /* halftone dot texture for accent panels */
 .halftone {
   background-image: radial-gradient(currentColor 1px, transparent 1.5px);

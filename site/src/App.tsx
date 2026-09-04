@@ -29,6 +29,8 @@ import { ZoomPunch } from './brutal/ZoomPunch'
 import { Orbit } from './brutal/Orbit'
 import { Gap } from './brutal/Gap'
 import { Backdrop } from './brutal/Backdrop'
+import { Trail } from './brutal/Trail'
+import { useEffect } from 'react'
 
 /* BRUTAL — MAXIMUM LENGTH EDITION. 20 sections.
    Click anywhere to stamp. ☀ bottom-left for day mode. */
@@ -36,11 +38,22 @@ import { Backdrop } from './brutal/Backdrop'
 export default function App() {
   const [ready, setReady] = useState(false)
 
+  // wipe-in section titles when they enter
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('wiped')),
+      { threshold: 0.4 },
+    )
+    document.querySelectorAll('[data-wipe]').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [ready])
+
   return (
-    <div id="top" className="noise relative">
+    <div id="top" className="noise vignette relative">
       <Loader onDone={() => setReady(true)} />
       <Backdrop />
       <StampLayer />
+      <Trail />
       <Progress />
       <SideNav />
       <DayToggle />

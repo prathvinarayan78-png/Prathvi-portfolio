@@ -40,9 +40,24 @@ export function Marquee({
           className="marq flex whitespace-nowrap items-center gap-6 font-black text-lg md:text-2xl uppercase"
           style={{ ['--spd' as string]: `${speed}s`, animationDirection: reverse ? 'reverse' : 'normal' }}
         >
-          {[...row, ...row, ...row, ...row].map((s, i) => (
-            <span key={i}>{s}</span>
-          ))}
+          {[...row, ...row, ...row, ...row].map((s, i) =>
+            s === '★' ? (
+              <span key={i} className="text-[#ff4d00]">★</span>
+            ) : (
+              <span
+                key={i}
+                style={
+                  (i >> 1) % 3 === 1
+                    ? { WebkitTextStroke: '1.5px currentColor', color: 'transparent' }
+                    : (i >> 1) % 3 === 2
+                      ? { color: '#ff4d00' }
+                      : undefined
+                }
+              >
+                {s}
+              </span>
+            ),
+          )}
         </div>
       </div>
     </div>

@@ -154,7 +154,7 @@ export function Footer() {
         {/* socials */}
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 mt-14 font-bold text-[11px] md:text-xs uppercase">
           {['INSTAGRAM', 'BEHANCE', 'GITHUB', 'X/TWITTER'].map((s) => (
-            <a key={s} href="#" className="slab px-4 py-2 bg-page" data-noclick>
+            <a key={s} href="#" className="slab shadow-pop-orange px-4 py-2 bg-page" data-noclick>
               {s} ↗
             </a>
           ))}

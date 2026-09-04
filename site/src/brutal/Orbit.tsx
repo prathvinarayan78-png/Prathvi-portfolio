@@ -34,7 +34,7 @@ export function Orbit() {
     <section ref={root} className="relative overflow-hidden border-t-[3px] border-current py-40 md:py-64 grid place-items-center min-h-[110svh]">
       <div className="text-center relative z-10 px-4" data-noclick>
         <p className="font-bold text-xs md:text-sm uppercase mb-3">the arsenal</p>
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)]">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)]">
           TOOL<span className="text-[#2f49ff]">*</span>BELT
         </h2>
         <p className="font-bold text-[10px] md:text-xs uppercase mt-3 opacity-60">scroll spins the wheel</p>

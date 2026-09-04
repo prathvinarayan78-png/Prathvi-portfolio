@@ -56,8 +56,8 @@ function Print({ p }: { p: (typeof PRINTS)[0] }) {
       className="absolute w-[44%] sm:w-[30%] md:w-[24%] cursor-grab active:cursor-grabbing touch-none will-change-transform"
       style={{ left: p.x, top: p.y, rotate: `${p.rot}deg` }}
     >
-      <div className="slab bg-page p-2">
-        <img src={p.img} alt={p.label} loading="lazy" className="img-brut w-full aspect-[4/3] object-cover pointer-events-none" />
+      <div className="slab bg-page p-2 duo-wrap">
+        <img src={p.img} alt={p.label} loading="lazy" className="duo w-full aspect-[4/3] object-cover pointer-events-none" />
         <p className="font-bold text-[8px] md:text-[10px] uppercase mt-2 opacity-70 truncate">{p.label}</p>
       </div>
     </div>
@@ -88,7 +88,7 @@ export function Desk() {
   return (
     <section ref={root} className="px-4 md:px-8 py-20 md:py-28 border-t-[3px] border-current overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
-        <h2 className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
+        <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/02</span>
           THE<span className="text-[#ff4d00]">*</span>DESK
         </h2>
