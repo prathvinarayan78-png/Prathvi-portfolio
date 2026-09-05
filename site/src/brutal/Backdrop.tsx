@@ -144,11 +144,9 @@ export function Backdrop() {
       <div
         ref={wordEl}
         key={word}
-        className="absolute left-1/2 top-1/2 mega whitespace-nowrap will-change-transform select-none"
+        className="absolute left-1/2 top-1/2 mega whitespace-nowrap will-change-transform select-none txt-outline"
         style={{
           fontSize: 'clamp(6rem, 24vw, 22rem)',
-          color: 'transparent',
-          WebkitTextStroke: '2px currentColor',
           opacity: 0.07,
           animation: 'wmIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both',
         }}

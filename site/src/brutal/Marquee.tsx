@@ -46,13 +46,8 @@ export function Marquee({
             ) : (
               <span
                 key={i}
-                style={
-                  (i >> 1) % 3 === 1
-                    ? { WebkitTextStroke: '1.5px currentColor', color: 'transparent' }
-                    : (i >> 1) % 3 === 2
-                      ? { color: '#ff4d00' }
-                      : undefined
-                }
+                className={(i >> 1) % 3 === 1 ? 'txt-outline-thin' : ''}
+                style={(i >> 1) % 3 === 2 ? { color: '#ff4d00' } : undefined}
               >
                 {s}
               </span>

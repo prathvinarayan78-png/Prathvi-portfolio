@@ -69,15 +69,11 @@ export function ScrollRail() {
                   className={`mega leading-[0.95] text-[clamp(2.6rem,9.5vw,8.5rem)] transition-colors duration-150 ${
                     row.style === 'block'
                       ? 'px-3 md:px-5 text-[#0a0a0a] group-hover:text-[#ff4d00] group-hover:bg-[#0a0a0a]'
-                      : 'group-hover:text-[#ff4d00]'
+                      : row.style === 'stroke'
+                        ? 'txt-outline'
+                        : 'group-hover:text-[#ff4d00]'
                   }`}
-                  style={
-                    row.style === 'stroke'
-                      ? { WebkitTextStroke: '2.5px currentColor', color: 'transparent' }
-                      : row.style === 'block'
-                        ? { backgroundColor: row.color }
-                        : undefined
-                  }
+                  style={row.style === 'block' ? { backgroundColor: row.color } : undefined}
                 >
                   {row.word}
                 </span>
