@@ -65,7 +65,7 @@ export function CaseFile() {
   }, [])
 
   return (
-    <section ref={root} id="case" className="px-4 md:px-8 py-20 md:py-28 overflow-hidden">
+    <section ref={root} id="case" className="px-4 md:px-8 py-20 md:py-28 overflow-hidden md:min-h-screen md:flex md:flex-col md:justify-center">
       <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/02</span>
@@ -74,25 +74,25 @@ export function CaseFile() {
         <span className="font-bold text-xs md:text-sm uppercase hidden md:block">problem → move → result</span>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto items-stretch">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-10 w-full items-stretch">
         {STEPS.map((s, i) => (
-          <article key={s.k} data-cs className={`slab ${s.c} p-6 md:p-8 will-change-transform h-full flex flex-col case-card`} data-noclick>
+          <article key={s.k} data-cs className={`slab ${s.c} p-6 md:p-10 will-change-transform h-full flex flex-col case-card md:min-h-[380px]`} data-noclick>
             <div className="flex items-center justify-between">
               <span className="font-bold text-[10px] md:text-xs uppercase border-[2.5px] border-current px-2 py-1">{s.k}</span>
               <span className="font-black text-2xl md:text-3xl">{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <p className="mega text-[clamp(1.5rem,3vw,2.4rem)] mt-5">{s.t}</p>
-            <p className="font-bold text-[11px] md:text-sm uppercase mt-3 leading-relaxed flex-1">{s.d}</p>
+            <p className="mega text-[clamp(1.5rem,3.6vw,3rem)] mt-5">{s.t}</p>
+            <p className="font-bold text-[11px] md:text-base uppercase mt-4 leading-relaxed flex-1">{s.d}</p>
           </article>
         ))}
       </div>
 
       {/* hard numbers strip */}
-      <div data-metrics className="grid grid-cols-3 max-w-6xl mx-auto mt-14 md:mt-20 border-[3px] case-border bg-page">
+      <div data-metrics className="grid grid-cols-3 w-full mt-14 md:mt-20 border-[3px] case-border bg-page">
         {METRICS.map((m, i) => (
           <div key={m.l} className={`text-center py-6 md:py-10 ${i > 0 ? 'border-l-[3px] case-border' : ''}`}>
             <div data-metric-inner className="will-change-transform">
-              <p className="mega text-[clamp(1.8rem,5vw,4rem)] text-[#ff4d00]">{m.n}</p>
+              <p className="mega text-[clamp(1.8rem,6vw,5rem)] text-[#ff4d00]">{m.n}</p>
               <p className="font-bold text-[9px] md:text-xs uppercase mt-2 opacity-70">{m.l}</p>
             </div>
           </div>
