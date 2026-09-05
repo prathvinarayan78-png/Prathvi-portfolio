@@ -54,7 +54,7 @@ export function StickyStack() {
           <div
             key={r.n}
             data-rule
-            className={`slab ${r.c} sticky top-[84px] md:top-[96px] p-6 md:p-10 will-change-transform`}
+            className={`slab case-card ${r.c} sticky top-[84px] md:top-[96px] p-6 md:p-10 will-change-transform`}
             data-noclick
           >
             <span className="font-black text-[10px] md:text-xs">{r.n}</span>

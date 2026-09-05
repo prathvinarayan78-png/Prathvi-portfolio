@@ -126,7 +126,7 @@ export function Process() {
                 />
                 <span className="md:hidden absolute top-10 -left-4 h-[5px] w-4 bg-[#ff4d00]" />
 
-                <div className={`slab shadow-pop-blue ${s.c} p-4 md:p-7 overflow-hidden`} data-noclick>
+                <div className={`slab case-card shadow-pop-blue ${s.c} p-4 md:p-7 overflow-hidden`} data-noclick>
                   <div className="flex items-start justify-between gap-4">
                     <span
                       data-badge
@@ -150,7 +150,7 @@ export function Process() {
 
         {/* end cap */}
         <div className="relative mt-16 md:mt-24 text-center">
-          <span className="inline-block slab pop font-black uppercase text-sm md:text-lg px-6 py-3 rotate-[-1.5deg]" data-noclick>
+          <span className="inline-block slab case-card pop font-black uppercase text-sm md:text-lg px-6 py-3 rotate-[-1.5deg]" data-noclick>
             RESULT: WORK THAT SLAPS ✓
           </span>
         </div>

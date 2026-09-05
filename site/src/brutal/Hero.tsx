@@ -106,13 +106,13 @@ export function Hero({ ready = true }: { ready?: boolean }) {
 
         {/* draggable stickers */}
         <Sticker x="68%" y="4%" rot={-8}>
-          <span className="block acid slab font-black text-sm md:text-base px-4 py-2">DRAG ME ★</span>
+          <span className="block acid slab case-card font-black text-sm md:text-base px-4 py-2">DRAG ME ★</span>
         </Sticker>
         <Sticker x="8%" y="58%" rot={6}>
-          <span className="block pop slab font-black text-sm md:text-base px-4 py-2">100% HANDMADE</span>
+          <span className="block pop slab case-card font-black text-sm md:text-base px-4 py-2">100% HANDMADE</span>
         </Sticker>
         <Sticker x="80%" y="66%" rot={-4} className="hidden md:block">
-          <span className="block blue slab font-black text-sm md:text-base px-4 py-2">EST. 2026</span>
+          <span className="block blue slab case-card font-black text-sm md:text-base px-4 py-2">EST. 2026</span>
         </Sticker>
       </div>
 

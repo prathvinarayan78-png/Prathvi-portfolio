@@ -126,7 +126,7 @@ export function Footer() {
           {/* signature stamp overlapping the word */}
           <span
             data-stamp
-            className="absolute -top-4 -right-6 md:-right-16 slab acid font-black uppercase text-[10px] md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 will-change-transform"
+            className="absolute -top-4 -right-6 md:-right-16 slab case-card acid font-black uppercase text-[10px] md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 will-change-transform"
           >
             TO ME ★ NOW
           </span>
@@ -136,7 +136,7 @@ export function Footer() {
           <button
             data-noclick
             onClick={smash}
-            className="slab pop glow-mint font-black uppercase text-base md:text-2xl px-8 md:px-14 py-4 md:py-6 jitter"
+            className="slab case-card pop glow-mint font-black uppercase text-base md:text-2xl px-8 md:px-14 py-4 md:py-6 jitter"
           >
             {smashes === 0 && 'SMASH TO EMAIL'}
             {smashes === 1 && 'HARDER.'}

@@ -59,7 +59,7 @@ export function BrainSplit() {
             key={h.t}
             data-half
             data-from={h.from}
-            className={`slab shadow-pop-orange ${h.c} p-6 md:p-8 text-center will-change-transform`}
+            className={`slab case-card shadow-pop-orange ${h.c} p-6 md:p-8 text-center will-change-transform`}
             data-noclick
           >
             <p className="mega text-[clamp(1.6rem,3.6vw,2.8rem)]">{h.t}</p>

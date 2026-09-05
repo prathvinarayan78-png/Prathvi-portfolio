@@ -79,7 +79,7 @@ export function Packages() {
             data-noclick
           >
             {t.hot && (
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 pop slab font-black text-[10px] md:text-xs uppercase px-3 py-1 rotate-[-2deg]">
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 pop slab case-card font-black text-[10px] md:text-xs uppercase px-3 py-1 rotate-[-2deg]">
                 ★ MOST PICKED ★
               </span>
             )}
