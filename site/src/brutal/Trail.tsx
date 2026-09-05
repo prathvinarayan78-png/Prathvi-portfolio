@@ -15,8 +15,9 @@ export function Trail() {
     let i = 0
     const move = (e: MouseEvent) => {
       const now = performance.now()
-      if (now - last < 40) return // throttle ~25/s max
+      if (now - last < 70) return // throttle ~14/s max
       last = now
+      if (document.querySelectorAll('.trail-bit').length > 14) return // hard cap
       const bit = document.createElement('span')
       bit.className = 'trail-bit'
       bit.style.left = `${e.clientX}px`

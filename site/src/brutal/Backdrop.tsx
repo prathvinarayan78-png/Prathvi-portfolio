@@ -45,8 +45,10 @@ export function Backdrop() {
 
   useEffect(() => {
     let raf = 0
+    let frame = 0
+    let max = document.documentElement.scrollHeight - innerHeight
     const tick = () => {
-      const max = document.documentElement.scrollHeight - innerHeight
+      if (++frame % 120 === 0) max = document.documentElement.scrollHeight - innerHeight
       const p = max > 0 ? scrollY / max : 0
 
       if (grid.current)

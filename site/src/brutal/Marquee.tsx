@@ -17,15 +17,15 @@ export function Marquee({
   const inner = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!inner.current) return
     let lastY = scrollY
     let raf = 0
+    // one persistent tween, retargeted — no per-frame tween creation
+    const skewTo = gsap.quickTo(inner.current, 'skewX', { duration: 0.3, ease: 'power2.out' })
     const tick = () => {
       const v = scrollY - lastY
       lastY = scrollY
-      const skew = gsap.utils.clamp(-14, 14, v * 0.6)
-      if (inner.current) {
-        gsap.to(inner.current, { skewX: skew, duration: 0.3, ease: 'power2.out', overwrite: 'auto' })
-      }
+      skewTo(gsap.utils.clamp(-14, 14, v * 0.6))
       raf = requestAnimationFrame(tick)
     }
     tick()

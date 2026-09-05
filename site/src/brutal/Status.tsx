@@ -10,12 +10,16 @@ gsap.registerPlugin(ScrollTrigger)
 export function Status() {
   const root = useRef<HTMLElement>(null)
   const [coffee, setCoffee] = useState(2)
-  const [uptime, setUptime] = useState(0)
+  const uptimeRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const t0 = Date.now()
     const id = setInterval(() => {
-      setUptime(Math.floor((Date.now() - t0) / 1000))
+      const uptime = Math.floor((Date.now() - t0) / 1000)
+      const hh = String(Math.floor(uptime / 3600)).padStart(2, '0')
+      const mm = String(Math.floor((uptime % 3600) / 60)).padStart(2, '0')
+      const ss = String(uptime % 60).padStart(2, '0')
+      if (uptimeRef.current) uptimeRef.current.textContent = `${hh}:${mm}:${ss}`
       if (Math.random() < 0.02) setCoffee((c) => c + 1)
     }, 1000)
     return () => clearInterval(id)
@@ -39,16 +43,12 @@ export function Status() {
     return () => ctx.revert()
   }, [])
 
-  const hh = String(Math.floor(uptime / 3600)).padStart(2, '0')
-  const mm = String(Math.floor((uptime % 3600) / 60)).padStart(2, '0')
-  const ss = String(uptime % 60).padStart(2, '0')
-
   const ROWS = [
     { k: 'AVAILABILITY', v: 'OPEN FOR PROJECTS', c: '#00ffa3', blink: true },
     { k: 'LOCATION', v: 'DELHI, IN — GMT+5:30', c: '' },
     { k: 'CURRENT OBSESSION', v: 'AGENTIC WORKFLOWS', c: '#ff4d00' },
     { k: 'COFFEE COUNTER', v: `${String(coffee).padStart(2, '0')} CUPS`, c: '' },
-    { k: 'SESSION UPTIME', v: `${hh}:${mm}:${ss}`, c: '#2f49ff', mono: true },
+    { k: 'SESSION UPTIME', v: 'UPTIME', c: '#2f49ff', mono: true },
     { k: 'TEMPLATES USED', v: 'STILL ZERO', c: '' },
     { k: 'RESPONSE TIME', v: '< 24 HRS OR IT’S FREE*', c: '#ff4d00' },
   ]
@@ -72,10 +72,11 @@ export function Status() {
           >
             <span className="font-bold text-[10px] md:text-sm uppercase opacity-70">{r.k}</span>
             <span
+              ref={r.k === 'SESSION UPTIME' ? uptimeRef : undefined}
               className={`font-black uppercase text-xs md:text-lg text-right tabular-nums ${r.blink ? 'blink' : ''}`}
               style={r.c ? { color: r.c } : undefined}
             >
-              {r.v}
+              {r.k === 'SESSION UPTIME' ? '00:00:00' : r.v}
             </span>
           </div>
         ))}

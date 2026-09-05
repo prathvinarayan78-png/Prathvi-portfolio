@@ -78,12 +78,18 @@ export function Nav() {
   const [pct, setPct] = useState(0)
   useEffect(() => {
     let raf = 0
+    let frame = 0
+    let max = document.documentElement.scrollHeight - innerHeight
     const loop = () => {
-      const max = document.documentElement.scrollHeight - innerHeight
-      setPct(Math.round((max > 0 ? scrollY / max : 0) * 100))
-      setScrolled(scrollY > 40)
+      if (++frame % 120 === 0) max = document.documentElement.scrollHeight - innerHeight
+      const p = max > 0 ? scrollY / max : 0
+      // React bails on equal values, but avoid the call entirely when possible
+      if (frame % 6 === 0) {
+        setPct(Math.round(p * 100))
+        setScrolled(scrollY > 40)
+      }
       if (star.current) star.current.style.transform = `rotate(${scrollY * 0.15}deg)`
-      if (bar.current) bar.current.style.setProperty('--p', `${max > 0 ? (scrollY / max) * 100 : 0}%`)
+      if (bar.current) bar.current.style.setProperty('--p', `${p * 100}%`)
       raf = requestAnimationFrame(loop)
     }
     loop()
