@@ -186,6 +186,20 @@ body.day .txt-outline, body.day .txt-outline-thin, body.inv .txt-outline, body.i
   -webkit-text-stroke-color: #0a0a0a;
 }
 
+/* CASE*FILE white outlines (ink in day mode so they stay visible) */
+.case-card {
+  border-color: #fff !important;
+  box-shadow: 6px 6px 0 0 #fff !important;
+}
+.case-card:hover { box-shadow: 10px 10px 0 0 #fff !important; transform: translate(-2px, -2px); }
+.case-border { border-color: #fff; }
+body.day .case-card, body.inv .case-card {
+  border-color: #0a0a0a !important;
+  box-shadow: 6px 6px 0 0 #0a0a0a !important;
+}
+body.day .case-card:hover, body.inv .case-card:hover { box-shadow: 10px 10px 0 0 #0a0a0a !important; }
+body.day .case-border, body.inv .case-border { border-color: #0a0a0a; }
+
 /* big number outline style */
 .num-ghost {
   color: transparent;

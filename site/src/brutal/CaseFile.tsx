@@ -76,7 +76,7 @@ export function CaseFile() {
 
       <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto items-stretch">
         {STEPS.map((s, i) => (
-          <article key={s.k} data-cs className={`slab ${s.c} p-6 md:p-8 will-change-transform h-full flex flex-col`} data-noclick>
+          <article key={s.k} data-cs className={`slab ${s.c} p-6 md:p-8 will-change-transform h-full flex flex-col case-card`} data-noclick>
             <div className="flex items-center justify-between">
               <span className="font-bold text-[10px] md:text-xs uppercase border-[2.5px] border-current px-2 py-1">{s.k}</span>
               <span className="font-black text-2xl md:text-3xl">{String(i + 1).padStart(2, '0')}</span>
@@ -88,9 +88,9 @@ export function CaseFile() {
       </div>
 
       {/* hard numbers strip */}
-      <div data-metrics className="grid grid-cols-3 max-w-4xl mx-auto mt-14 md:mt-20 border-[3px] border-current bg-page">
+      <div data-metrics className="grid grid-cols-3 max-w-4xl mx-auto mt-14 md:mt-20 border-[3px] case-border bg-page">
         {METRICS.map((m, i) => (
-          <div key={m.l} className={`text-center py-6 md:py-10 ${i > 0 ? 'border-l-[3px] border-current' : ''}`}>
+          <div key={m.l} className={`text-center py-6 md:py-10 ${i > 0 ? 'border-l-[3px] case-border' : ''}`}>
             <div data-metric-inner className="will-change-transform">
               <p className="mega text-[clamp(1.8rem,5vw,4rem)] text-[#ff4d00]">{m.n}</p>
               <p className="font-bold text-[9px] md:text-xs uppercase mt-2 opacity-70">{m.l}</p>
