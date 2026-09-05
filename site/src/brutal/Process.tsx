@@ -48,7 +48,11 @@ export function Process() {
     // ---------- desktop: conveyor scrub ----------
     mm.add('(min-width: 768px)', () => {
       const track = belt.current!
-      const travel = () => track.scrollWidth - innerWidth
+      const travel = () => {
+        const last = track.lastElementChild as HTMLElement
+        // distance that puts the last card's center on the screen center
+        return last.offsetLeft + last.offsetWidth / 2 - innerWidth / 2
+      }
 
       const st = ScrollTrigger.create({
         trigger: root.current,
@@ -61,15 +65,15 @@ export function Process() {
           // belt dashes crawl with progress
           if (dashes.current) gsap.set(dashes.current, { backgroundPositionX: `${-p * 900}px` })
           // step counter
-          const step = Math.min(STEPS.length, Math.max(1, Math.ceil(p * STEPS.length + 0.0001)))
+          const step = Math.min(STEPS.length, Math.max(1, Math.round(p * (STEPS.length - 1)) + 1))
           if (counter.current) counter.current.textContent = `STEP ${String(step).padStart(2, '0')} / ${String(STEPS.length).padStart(2, '0')}`
           // station bulb blinks faster near each card center
           if (bulb.current) bulb.current.style.opacity = String(0.35 + Math.abs(Math.sin(p * Math.PI * STEPS.length)) * 0.65)
 
           // stamps: reveal once its card passes the center of the screen
           document.querySelectorAll<HTMLElement>('[data-stamp-mark]').forEach((el, i) => {
-            const cardCenter = (i + 0.5) / STEPS.length
-            const show = p > cardCenter - 0.06
+            const hit = i / (STEPS.length - 1)
+            const show = p > hit - 0.04
             el.style.opacity = show ? '1' : '0'
             el.style.transform = show ? 'rotate(-12deg) scale(1)' : 'rotate(-12deg) scale(2.4)'
           })
@@ -100,9 +104,9 @@ export function Process() {
       {/* ================= DESKTOP FACTORY (sticky viewport) ================= */}
       <div className="hidden md:flex sticky top-0 h-screen flex-col justify-center overflow-hidden">
         {/* header row */}
-        <div className="flex items-end justify-between px-8 mb-10">
-          <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
-            <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/03</span>
+        <div className="flex items-end justify-between px-8 mb-14">
+          <h2 data-wipe className="mega text-[clamp(2rem,5.5vw,4.6rem)] relative">
+            <span aria-hidden className="num-ghost mega absolute -top-5 left-0 text-[clamp(1.2rem,2.6vw,2rem)]">/03</span>
             HOW<span className="text-[#00ffa3]">*</span>I*WORK
           </h2>
           <div className="flex items-center gap-4 font-bold text-xs uppercase">
@@ -118,7 +122,7 @@ export function Process() {
             {STEPS.map((s) => (
               <article
                 key={s.n}
-                className={`relative slab case-card ${s.c} w-[34vw] max-w-[520px] p-8 flex flex-col`}
+                className={`relative slab case-card ${s.c} w-[32vw] max-w-[480px] p-7 flex flex-col`}
                 data-noclick
               >
                 <div className="flex items-start justify-between">
@@ -135,7 +139,7 @@ export function Process() {
                 {/* verdict stamp — punched on as the card passes the station */}
                 <span
                   data-stamp-mark
-                  className="absolute -top-5 -right-4 border-[4px] border-[#ff4d00] text-[#ff4d00] font-black uppercase text-lg px-4 py-1.5 bg-page transition-all duration-300 pointer-events-none"
+                  className="absolute top-3 right-3 border-[4px] border-[#ff4d00] text-[#ff4d00] font-black uppercase text-base px-3 py-1 bg-page transition-all duration-300 pointer-events-none"
                   style={{ opacity: 0, transform: 'rotate(-12deg) scale(2.4)' }}
                 >
                   {s.stamp}
@@ -165,12 +169,12 @@ export function Process() {
           </div>
 
           {/* stamping station marker at screen center */}
-          <div aria-hidden className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
-            <span className="font-bold text-[10px] uppercase tracking-[0.3em] text-[#ff4d00]">▼ STATION</span>
+          <div aria-hidden className="absolute -top-8 left-1/2 -translate-x-1/2 pointer-events-none z-10">
+            <span className="font-bold text-[10px] uppercase tracking-[0.3em] text-[#ff4d00] bg-page border-[2.5px] border-[#ff4d00] px-3 py-1">▼ STATION</span>
           </div>
         </div>
 
-        <p className="px-8 mt-10 font-bold text-xs uppercase opacity-60">
+        <p className="px-8 mt-8 font-bold text-xs uppercase opacity-60">
           scroll drives the belt — every step gets stamped before it leaves the station
         </p>
       </div>
