@@ -68,29 +68,29 @@ export function Packages() {
         <span className="font-bold text-xs md:text-sm uppercase hidden md:block">clear scope. no mystery invoices.</span>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto items-stretch">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto items-stretch pt-6">
         {TIERS.map((t) => (
           <article
             key={t.name}
             data-tier
-            className={`relative slab ${t.hot ? 'shadow-pop-orange' : ''} bg-page p-6 md:p-8 flex flex-col will-change-transform ${
-              t.hot ? 'md:-translate-y-4' : ''
+            className={`relative slab bg-page p-6 md:p-8 flex flex-col will-change-transform ${
+              t.hot ? 'shadow-pop-orange border-[#ff4d00]' : ''
             }`}
             data-noclick
           >
             {t.hot && (
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 pop slab font-black text-[10px] md:text-xs uppercase px-3 py-1 rotate-[-2deg]">
-                ★ {t.tag} ★
+                ★ MOST PICKED ★
               </span>
             )}
-            {!t.hot && (
-              <span className="font-bold text-[9px] md:text-[10px] uppercase opacity-50">{t.tag}</span>
-            )}
+            <span className={`font-bold text-[9px] md:text-[10px] uppercase h-5 flex items-center ${t.hot ? 'text-[#ff4d00]' : 'opacity-50'}`}>
+              {t.tag}
+            </span>
 
-            <p className={`mega text-[clamp(1.7rem,3.4vw,2.6rem)] ${t.hot ? 'mt-3' : 'mt-2'}`}>{t.name}</p>
+            <p className="mega text-[clamp(1.7rem,3.4vw,2.6rem)] mt-2">{t.name}</p>
             <p className="font-bold text-[10px] md:text-xs uppercase mt-1 text-[#ff4d00]">{t.for}</p>
 
-            <ul className="mt-6 space-y-3 flex-1">
+            <ul className="mt-6 mb-8 space-y-3">
               {t.items.map((it) => (
                 <li key={it} className="flex gap-3 font-bold text-[11px] md:text-sm uppercase leading-snug">
                   <span className="text-[#00ffa3] font-black">■</span> {it}
@@ -98,15 +98,15 @@ export function Packages() {
               ))}
             </ul>
 
-            <div className="mt-8 pt-5 border-t-[3px] border-current flex items-end justify-between">
-              <div>
-                <p className="font-black uppercase text-sm md:text-lg">{t.price}</p>
+            <div className="mt-auto pt-5 border-t-[3px] border-current flex items-center justify-between gap-3 min-h-[86px]">
+              <div className="min-w-0">
+                <p className="font-black uppercase text-sm md:text-lg leading-tight">{t.price}</p>
                 <p className="font-bold text-[9px] md:text-[10px] uppercase opacity-60 mt-1">{t.eta}</p>
               </div>
               <a
                 href="#contact"
                 data-noclick
-                className={`slab ${t.c} font-black uppercase text-[10px] md:text-xs px-4 py-2.5`}
+                className={`slab ${t.c} font-black uppercase text-[10px] md:text-xs px-4 py-2.5 shrink-0`}
               >
                 PICK ▸
               </a>
