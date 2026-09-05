@@ -4,38 +4,42 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* THE*MENU — productized packages with transparent "starts at"
-   framing. Research says: clear tiers + investment framing filters
-   serious clients and builds instant trust. */
+/* THE*MENU v2 — diner board redesign.
+   Three full-width horizontal boards instead of cramped columns:
+   [ color name-plate | spec list | price rail + PICK ]
+   Boards slide in from alternating sides; hover shifts the whole
+   board like a pulled menu card. */
 
 const TIERS = [
   {
+    no: 'A',
     name: 'THE POSTER',
-    tag: 'DESIGN HIT',
     c: 'acid',
-    for: 'One loud deliverable',
-    items: ['Poster / cover / key visual', '3 concepts, 2 revision rounds', 'Print + social-ready exports'],
+    for: 'ONE LOUD DELIVERABLE',
+    items: ['POSTER / COVER / KEY VISUAL', '3 CONCEPTS · 2 REVISION ROUNDS', 'PRINT + SOCIAL EXPORTS'],
     price: 'STARTS LIGHT',
     eta: '48H FIRST DRAFT',
+    hot: false,
   },
   {
+    no: 'B',
     name: 'THE SITE',
-    tag: 'MOST PICKED',
     c: 'pop',
-    for: 'A web presence that slaps',
-    items: ['Design + build (like this site)', 'Animations & interactions included', 'Deployed, responsive, yours'],
+    for: 'A WEB PRESENCE THAT SLAPS',
+    items: ['DESIGN + BUILD (LIKE THIS SITE)', 'ANIMATIONS & INTERACTIONS IN', 'DEPLOYED · RESPONSIVE · YOURS'],
     price: 'STARTS SERIOUS',
     eta: '2–4 WEEKS',
     hot: true,
   },
   {
+    no: 'C',
     name: 'THE MACHINE',
-    tag: 'FULL STACK',
     c: 'blue',
-    for: 'Brand + site + content engine',
-    items: ['Identity system + website', 'Video edit templates & first cuts', 'AI agent workflows for content ops'],
+    for: 'BRAND + SITE + CONTENT ENGINE',
+    items: ['IDENTITY SYSTEM + WEBSITE', 'VIDEO EDIT TEMPLATES + FIRST CUTS', 'AI AGENT WORKFLOWS FOR CONTENT'],
     price: 'LET’S TALK',
     eta: 'ONGOING',
+    hot: false,
   },
 ]
 
@@ -44,13 +48,13 @@ export function Packages() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('[data-tier]', root.current!).forEach((el, i) => {
+      gsap.utils.toArray<HTMLElement>('[data-board]', root.current!).forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 90, opacity: 0 },
+          { xPercent: i % 2 ? 8 : -8, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: i * 0.12,
-            scrollTrigger: { trigger: root.current, start: 'top 70%' },
+            xPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 85%' },
           },
         )
       })
@@ -59,7 +63,7 @@ export function Packages() {
   }, [])
 
   return (
-    <section ref={root} id="menu" className="px-4 md:px-8 py-20 md:py-28">
+    <section ref={root} id="menu" className="px-4 md:px-8 py-20 md:py-28 overflow-hidden">
       <div className="flex items-end justify-between mb-16 md:mb-24">
         <h2 data-wipe className="mega text-[clamp(2.6rem,9vw,8rem)] relative">
           <span aria-hidden className="num-ghost mega absolute -top-6 md:-top-10 left-0 text-[clamp(1.6rem,4vw,3rem)]">/15</span>
@@ -68,54 +72,62 @@ export function Packages() {
         <span className="font-bold text-xs md:text-sm uppercase hidden md:block">clear scope. no mystery invoices.</span>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto items-stretch pt-6">
+      <div className="max-w-6xl mx-auto space-y-8 md:space-y-10">
         {TIERS.map((t) => (
           <article
-            key={t.name}
-            data-tier
-            className={`relative slab bg-page p-6 md:p-8 flex flex-col will-change-transform ${
-              t.hot ? 'shadow-pop-orange border-[#ff4d00]' : ''
+            key={t.no}
+            data-board
+            className={`group relative slab case-card bg-page will-change-transform transition-transform duration-200 hover:-translate-y-1 ${
+              t.hot ? 'shadow-pop-orange' : ''
             }`}
             data-noclick
           >
             {t.hot && (
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 pop slab case-card font-black text-[10px] md:text-xs uppercase px-3 py-1 rotate-[-2deg]">
-                ★ MOST PICKED ★
+              <span className="absolute -top-4 right-6 md:right-10 pop slab case-card font-black text-[10px] md:text-xs uppercase px-3 py-1 rotate-[2deg] z-10">
+                ★ MOST PICKED
               </span>
             )}
-            <span className={`font-bold text-[9px] md:text-[10px] uppercase h-5 flex items-center ${t.hot ? 'text-[#ff4d00]' : 'opacity-50'}`}>
-              {t.tag}
-            </span>
 
-            <p className="mega text-[clamp(1.7rem,3.4vw,2.6rem)] mt-2">{t.name}</p>
-            <p className="font-bold text-[10px] md:text-xs uppercase mt-1 text-[#ff4d00]">{t.for}</p>
-
-            <ul className="mt-6 mb-8 space-y-3">
-              {t.items.map((it) => (
-                <li key={it} className="flex gap-3 font-bold text-[11px] md:text-sm uppercase leading-snug">
-                  <span className="text-[#00ffa3] font-black">■</span> {it}
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-auto pt-5 border-t-[3px] border-current flex items-center justify-between gap-3 min-h-[86px]">
-              <div className="min-w-0">
-                <p className="font-black uppercase text-sm md:text-lg leading-tight">{t.price}</p>
-                <p className="font-bold text-[9px] md:text-[10px] uppercase opacity-60 mt-1">{t.eta}</p>
+            <div className="grid md:grid-cols-[240px_1fr_220px] lg:grid-cols-[300px_1fr_260px] items-stretch">
+              {/* name plate */}
+              <div className={`${t.c} p-5 md:p-7 flex flex-col justify-between border-b-[3px] md:border-b-0 md:border-r-[3px] border-current`}>
+                <span className="font-black text-3xl md:text-5xl opacity-80">{t.no}/</span>
+                <div className="mt-6 md:mt-0">
+                  <p className="mega text-[clamp(1.5rem,3vw,2.2rem)] leading-none break-words">{t.name}</p>
+                  <p className="font-bold text-[9px] md:text-[10px] uppercase mt-2 leading-snug">{t.for}</p>
+                </div>
               </div>
-              <a
-                href="#contact"
-                data-noclick
-                className={`slab ${t.c} font-black uppercase text-[10px] md:text-xs px-4 py-2.5 shrink-0`}
-              >
-                PICK ▸
-              </a>
+
+              {/* spec list */}
+              <ul className="p-5 md:p-7 space-y-3 md:space-y-4 border-b-[3px] md:border-b-0 md:border-r-[3px] border-current self-center w-full">
+                {t.items.map((it) => (
+                  <li key={it} className="flex gap-3 items-baseline font-bold text-[11px] md:text-sm uppercase leading-snug">
+                    <span className="text-[#ff4d00] font-black shrink-0">▸</span>
+                    <span className="min-w-0">{it}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* price rail */}
+              <div className="p-5 md:p-7 flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 text-right">
+                <div>
+                  <p className="font-black uppercase text-base md:text-xl leading-tight">{t.price}</p>
+                  <p className="font-bold text-[9px] md:text-[10px] uppercase opacity-60 mt-1">{t.eta}</p>
+                </div>
+                <a
+                  href="#contact"
+                  data-noclick
+                  className={`slab ${t.c} font-black uppercase text-[11px] md:text-sm px-6 py-3 shrink-0 group-hover:translate-x-1 transition-transform`}
+                >
+                  PICK ▸
+                </a>
+              </div>
             </div>
           </article>
         ))}
       </div>
 
-      <p className="text-center font-bold text-[10px] md:text-xs uppercase mt-8 opacity-60">
+      <p className="text-center font-bold text-[10px] md:text-xs uppercase mt-10 opacity-60">
         exact quote after one call — scope first, number second, no surprises ever.
       </p>
     </section>
