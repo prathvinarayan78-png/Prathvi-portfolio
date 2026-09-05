@@ -23,11 +23,11 @@ export function Reviews() {
       gsap.utils.toArray<HTMLElement>('[data-rev]').forEach((el, i) => {
         gsap.fromTo(
           el,
-          { scale: 1.6, opacity: 0, rotation: Number(el.dataset.rot) * 4 },
+          { scale: 0.9, opacity: 0, y: 40, rotation: 0 },
           {
-            scale: 1, opacity: 1, rotation: Number(el.dataset.rot),
-            duration: 0.35, ease: 'power4.in', delay: (i % 3) * 0.08,
-            scrollTrigger: { trigger: el, start: 'top 85%' },
+            scale: 1, opacity: 1, y: 0, rotation: Number(el.dataset.rot),
+            duration: 0.45, ease: 'back.out(1.8)', delay: (i % 3) * 0.08,
+            scrollTrigger: { trigger: el, start: 'top 88%' },
           },
         )
       })
@@ -45,24 +45,23 @@ export function Reviews() {
         <span className="font-bold text-xs md:text-sm uppercase">reviews from the future*</span>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-7 md:gap-12 pt-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-7 md:gap-x-12 gap-y-10 md:gap-y-14 pt-5">
         {REVIEWS.map((r) => (
           <figure
             key={r.who}
             data-rev
             data-rot={r.rot}
-            className="slab slab-hot shadow-pop-orange p-5 md:p-6 will-change-transform bg-page"
-            style={{ rotate: `${r.rot}deg` }}
+            className="relative slab slab-hot shadow-pop-orange p-5 md:p-6 will-change-transform bg-page"
           >
             {/* tape */}
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-5 acid border-[3px] border-current rotate-[-3deg]" />
-            <blockquote className="font-bold text-sm md:text-base uppercase leading-snug">{r.q}</blockquote>
+            <blockquote className="font-bold text-sm md:text-base uppercase leading-snug mt-2">{r.q}</blockquote>
             <figcaption className="font-black text-[10px] md:text-xs mt-4 text-[#ff4d00]">— {r.who}</figcaption>
           </figure>
         ))}
       </div>
 
-      <p className="font-bold text-[10px] md:text-xs uppercase mt-6 opacity-60">
+      <p className="font-bold text-[10px] md:text-xs uppercase mt-12 md:mt-16 opacity-60">
         *your review could be here. that's the whole point of the contact button below.
       </p>
     </section>
