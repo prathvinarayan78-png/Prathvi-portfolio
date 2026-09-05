@@ -28,6 +28,9 @@ import { StickyStack } from './brutal/StickyStack'
 import { ZoomPunch } from './brutal/ZoomPunch'
 import { Orbit } from './brutal/Orbit'
 import { Gap } from './brutal/Gap'
+import { CaseFile } from './brutal/CaseFile'
+import { Packages } from './brutal/Packages'
+import { Brief } from './brutal/Brief'
 import { Backdrop } from './brutal/Backdrop'
 import { Trail } from './brutal/Trail'
 import { useEffect } from 'react'
@@ -79,6 +82,8 @@ export default function App() {
       <Gap />
       <WorkGrid />
       <Gap />
+      <CaseFile />
+      <Gap />
       <Desk />
       <Gap size="sm" />
       <ScrollRail />
@@ -114,6 +119,10 @@ export default function App() {
       <ZoomPunch />
       <Gap />
       <Status />
+      <Gap />
+      <Packages />
+      <Gap />
+      <Brief />
       <Gap size="sm" />
       <Marquee reverse items={['SCROLL FASTER', 'HOVER EVERYTHING', 'CLICK EVERYTHING']} speed={22} />
       <Gap />
