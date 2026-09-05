@@ -75,7 +75,7 @@ export function BeforeAfter() {
         <span className="font-bold text-xs md:text-sm uppercase hidden md:block">drag the line. feel the grade.</span>
       </div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* grade mode chips */}
         <div className="flex flex-wrap items-center gap-2.5 mb-5" data-noclick>
           <span className="font-bold text-[9px] md:text-[10px] uppercase opacity-50 mr-1">GRADE:</span>

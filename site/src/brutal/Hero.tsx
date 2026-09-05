@@ -45,7 +45,7 @@ function SlamLine({ text, delay, accent, go }: { text: string; delay: number; ac
   }
 
   return (
-    <div ref={ref} className={`mega text-[clamp(3.4rem,13.5vw,15rem)] ${accent ?? ''}`} style={{ opacity: go ? undefined : 0 }} onMouseOver={hover}>
+    <div ref={ref} className={`mega text-[clamp(2.8rem,min(11.5vw,17vh),13rem)] ${accent ?? ''}`} style={{ opacity: go ? undefined : 0 }} onMouseOver={hover}>
       {text.split('').map((c, i) => (
         <span key={i} data-c className="inline-block will-change-transform cursor-default">
           {c}

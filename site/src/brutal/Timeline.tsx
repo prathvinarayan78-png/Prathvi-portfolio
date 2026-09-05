@@ -68,7 +68,7 @@ export function Timeline() {
         <span className="font-bold text-xs md:text-sm uppercase">scroll draws the line</span>
       </div>
 
-      <div data-rail className="relative max-w-3xl mx-auto pl-10 md:pl-16">
+      <div data-rail className="relative max-w-5xl mx-auto pl-10 md:pl-16">
         {/* the single spine — hugs the left edge of the rail */}
         <div className="absolute left-2.5 md:left-4 top-0 bottom-0 w-[5px] md:w-[6px] bg-current opacity-15" />
         <div

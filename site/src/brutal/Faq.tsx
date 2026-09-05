@@ -24,7 +24,7 @@ export function Faq() {
         <span className="font-bold text-xs md:text-sm uppercase">the questions everyone asks</span>
       </div>
 
-      <div className="border-t-[3px] border-current max-w-4xl">
+      <div className="border-t-[3px] border-current max-w-6xl mx-auto">
         {QA.map((item, i) => {
           const isOpen = open === i
           return (
@@ -41,7 +41,7 @@ export function Faq() {
               </button>
               <div className="grid transition-[grid-template-rows] duration-300 ease-out" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
                 <div className="overflow-hidden">
-                  <p className="font-bold text-xs md:text-sm uppercase leading-relaxed px-2 md:px-4 pb-5 max-w-2xl opacity-80">
+                  <p className="font-bold text-xs md:text-sm uppercase leading-relaxed px-2 md:px-4 pb-5 max-w-4xl opacity-80">
                     {item.a}
                   </p>
                 </div>

@@ -49,7 +49,7 @@ export function StickyStack() {
         <span className="font-bold text-xs md:text-sm uppercase">cards stack. keep scrolling.</span>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-12">
+      <div className="max-w-5xl mx-auto space-y-12">
         {RULES.map((r) => (
           <div
             key={r.n}
@@ -59,7 +59,7 @@ export function StickyStack() {
           >
             <span className="font-black text-[10px] md:text-xs">{r.n}</span>
             <p className="mega text-[clamp(1.8rem,5vw,3.6rem)] mt-2">{r.t}</p>
-            <p className="font-bold text-[11px] md:text-sm uppercase mt-4 leading-relaxed max-w-lg">{r.d}</p>
+            <p className="font-bold text-[11px] md:text-sm uppercase mt-4 leading-relaxed max-w-2xl">{r.d}</p>
           </div>
         ))}
       </div>

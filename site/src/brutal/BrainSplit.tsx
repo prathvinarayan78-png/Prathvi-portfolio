@@ -53,7 +53,7 @@ export function BrainSplit() {
         <span className="font-bold text-xs md:text-sm uppercase">zero handoffs. zero lost-in-translation.</span>
       </div>
 
-      <div className="relative grid md:grid-cols-3 gap-6 md:gap-10 max-w-5xl mx-auto">
+      <div className="relative grid md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto">
         {HALVES.map((h) => (
           <div
             key={h.t}
@@ -76,7 +76,7 @@ export function BrainSplit() {
         </span>
       </div>
 
-      <p className="text-center font-bold text-xs md:text-base uppercase mt-10 md:mt-14 max-w-2xl mx-auto leading-relaxed">
+      <p className="text-center font-bold text-xs md:text-base uppercase mt-10 md:mt-14 max-w-3xl mx-auto leading-relaxed">
         same skull. the designer never argues with the developer,
         and the editor already knows what the design needs to feel like in motion.
       </p>

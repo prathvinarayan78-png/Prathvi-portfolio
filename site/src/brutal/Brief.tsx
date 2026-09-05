@@ -19,7 +19,7 @@ export function Brief() {
 
   return (
     <section className="px-4 md:px-8 py-20 md:py-28">
-      <div className="max-w-3xl mx-auto slab bg-page p-7 md:p-12" data-noclick>
+      <div className="max-w-5xl mx-auto slab bg-page p-7 md:p-12" data-noclick>
         <p className="font-bold text-[10px] md:text-xs uppercase text-[#ff4d00] mb-2">// 30-second brief</p>
         <p className="mega text-[clamp(1.6rem,4vw,2.8rem)] mb-10">SCOPE IT RIGHT NOW.</p>
 

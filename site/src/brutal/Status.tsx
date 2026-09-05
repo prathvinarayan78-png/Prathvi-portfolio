@@ -63,7 +63,7 @@ export function Status() {
         <span className="font-bold text-xs md:text-sm uppercase">live status. allegedly.</span>
       </div>
 
-      <div className="max-w-4xl border-[3px] border-current">
+      <div className="max-w-6xl mx-auto border-[3px] border-current">
         {ROWS.map((r) => (
           <div
             key={r.k}

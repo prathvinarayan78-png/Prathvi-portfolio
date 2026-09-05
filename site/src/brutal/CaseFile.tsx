@@ -88,7 +88,7 @@ export function CaseFile() {
       </div>
 
       {/* hard numbers strip */}
-      <div data-metrics className="grid grid-cols-3 max-w-4xl mx-auto mt-14 md:mt-20 border-[3px] case-border bg-page">
+      <div data-metrics className="grid grid-cols-3 max-w-6xl mx-auto mt-14 md:mt-20 border-[3px] case-border bg-page">
         {METRICS.map((m, i) => (
           <div key={m.l} className={`text-center py-6 md:py-10 ${i > 0 ? 'border-l-[3px] case-border' : ''}`}>
             <div data-metric-inner className="will-change-transform">
