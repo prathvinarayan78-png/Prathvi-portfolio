@@ -77,7 +77,7 @@ export function Packages() {
           <article
             key={t.no}
             data-board
-            className={`group relative slab case-card bg-page will-change-transform transition-transform duration-200 hover:-translate-y-1 ${
+            className={`group relative slab case-card bg-page overflow-hidden will-change-transform transition-transform duration-200 hover:-translate-y-1 ${
               t.hot ? 'shadow-pop-orange' : ''
             }`}
             data-noclick
@@ -88,18 +88,18 @@ export function Packages() {
               </span>
             )}
 
-            <div className="grid md:grid-cols-[240px_1fr_220px] lg:grid-cols-[300px_1fr_260px] items-stretch">
+            <div className="grid md:grid-cols-[230px_minmax(0,1fr)_210px] lg:grid-cols-[290px_minmax(0,1fr)_250px] items-stretch">
               {/* name plate */}
-              <div className={`${t.c} p-5 md:p-7 flex flex-col justify-between border-b-[3px] md:border-b-0 md:border-r-[3px] border-current`}>
+              <div className={`${t.c} p-5 md:p-7 flex flex-col justify-between border-b-[3px] md:border-b-0 md:border-r-[3px] border-current min-w-0`}>
                 <span className="font-black text-3xl md:text-5xl opacity-80">{t.no}/</span>
                 <div className="mt-6 md:mt-0">
                   <p className="mega text-[clamp(1.5rem,3vw,2.2rem)] leading-none break-words">{t.name}</p>
-                  <p className="font-bold text-[9px] md:text-[10px] uppercase mt-2 leading-snug">{t.for}</p>
+                  <p className="font-bold text-[9px] md:text-[10px] uppercase mt-2 leading-snug break-words">{t.for}</p>
                 </div>
               </div>
 
               {/* spec list */}
-              <ul className="p-5 md:p-7 space-y-3 md:space-y-4 border-b-[3px] md:border-b-0 md:border-r-[3px] border-current self-center w-full">
+              <ul className="p-5 md:p-7 space-y-3 md:space-y-4 border-b-[3px] md:border-b-0 md:border-r-[3px] border-current self-center w-full min-w-0">
                 {t.items.map((it) => (
                   <li key={it} className="flex gap-3 items-baseline font-bold text-[11px] md:text-sm uppercase leading-snug">
                     <span className="text-[#ff4d00] font-black shrink-0">▸</span>
@@ -109,7 +109,7 @@ export function Packages() {
               </ul>
 
               {/* price rail */}
-              <div className="p-5 md:p-7 flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 text-right">
+              <div className="p-5 md:p-7 flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 text-right min-w-0">
                 <div>
                   <p className="font-black uppercase text-base md:text-xl leading-tight">{t.price}</p>
                   <p className="font-bold text-[9px] md:text-[10px] uppercase opacity-60 mt-1">{t.eta}</p>
